@@ -1,0 +1,291 @@
+/* auth.css */
+
+body.auth-body {
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.auth-box {
+    background-color: var(--light-color);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    background-color: #e9ecef;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.auth-toggle button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    background-color: transparent;
+    color: var(--text-light);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-toggle button.active {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+    animation: fadeInForm 0.5s ease;
+}
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-header {
+    margin-bottom: 25px;
+}
+
+.form-logo {
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.form-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group label i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(15, 17, 104, 0.25);
+}
+
+.form-group select {
+    appearance: none; /* Pour un meilleur contrôle du style, si nécessaire */
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+}
+
+.form-options label {
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+}
+
+.form-options input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.form-options a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 12px;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 20px;
+}
+
+.auth-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.switch-form-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.switch-form-text a {
+    color: var(--accent-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.switch-form-text a:hover {
+    text-decoration: underline;
+}
+
+.social-login {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.social-login p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-icon.google { background-color: #DB4437; }
+.social-icon.facebook { background-color: #4267B2; }
+.social-icon.github { background-color: #333; }
+
+.social-icon:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+.back-to-home {
+    margin-top: 30px;
+}
+
+.back-to-home a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.back-to-home a:hover {
+    color: var(--primary-color);
+}
+
+.back-to-home i {
+    margin-right: 5px;
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 30px 25px;
+    }
+    .form-header h2 {
+        font-size: 1.6rem;
+    }
+    .auth-toggle button {
+        font-size: 0.9rem;
+    }
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column; /* Aligne les options verticalement */
+    gap: 10px; /* Espace entre le titre et les options, et entre les options */
+}
+
+.radio-group span { /* Style pour le titre de la question radio */
+    display: block;
+    margin-bottom: 5px; /* Espace sous le titre de la question */
+    font-weight: 500; /* Similaire aux labels */
+}
+
+.radio-group label {
+    font-weight: normal; /* Texte des options radio moins gras que les labels principaux */
+    color: var(--text-color);
+}
+
+.hidden-field {
+    display: none !important; /* Assure que le champ est bien caché */
+}

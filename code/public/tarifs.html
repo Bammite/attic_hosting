@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/generale.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/offres.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Nos Offres - Sanarois Services</title>
+    <link rel="icon" href="assets/svg/logoAttic.svg" type="image/svg+xml">
+
+</head>
+<body>
+    <nav class="glass-nav">
+        <div class="container">
+            <a href="./index.html" class="nav-brand">
+                <img src="assets/images/bammiteLogo.png" alt="Sanarois Logo" class="logo">
+            </a>
+
+            <div class="nav-content-wrapper">
+                <div class="nav-panel main-nav-panel">
+                    <ul class="nav-links">
+                        <span class="nav-links-left">
+                            <li><a href="tarifs.html">Tarifs</a></li>
+
+                            <li class="nav-item-with-dropdown" data-menu="services">
+                                <a>Services <i class="fas fa-chevron-down"></i></a>
+                                <div class="dropdown-panel" id="services-menu">
+                                    <div class="dropdown-column">
+                                        <h4 class="dropdown-title">Hébergements</h4>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-globe"></i>
+                                            <div>
+                                                <span class="link-title">Nom de domaine</span>
+                                                <span class="link-description">Trouvez et enregistrez le nom parfait.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-server"></i>
+                                            <div>
+                                                <span class="link-title">Hébergement Web</span>
+                                                <span class="link-description">Solutions fiables pour vos sites web.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-hdd"></i>
+                                            <div>
+                                                <span class="link-title">Hébergement VPS</span>
+                                                <span class="link-description">Un serveur virtuel puissant pour vos projets.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-database"></i>
+                                            <div>
+                                                <span class="link-title">Base de données</span>
+                                                <span class="link-description">Manager une BDD sécurisée, SQL & NoSQL.</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4 class="dropdown-title">Création & Développement</h4>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-laptop-code"></i>
+                                            <div>
+                                                <span class="link-title">Application Web</span>
+                                                <span class="link-description">Créons ensemble votre application web sur mesure.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div>
+                                                <span class="link-title">Application Mobile</span>
+                                                <span class="link-description">Développez votre app avec nos experts.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-cogs"></i>
+                                            <div>
+                                                <span class="link-title">Logiciel</span>
+                                                <span class="link-description">Concevez des logiciels personnalisés.</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4 class="dropdown-title">Cloud</h4>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-cloud"></i>
+                                            <div>
+                                                <span class="link-title">API</span>
+                                                <span class="link-description">Des API robustes et évolutives pour vos applications.</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="nav-item-with-dropdown" data-menu="explorer">
+                                <a>Explorer <i class="fas fa-chevron-down"></i></a>
+                                <div class="dropdown-panel" id="explorer-menu">
+                                <div class="dropdown-column">
+                                        <h4 class="dropdown-title">Offres populaires</h4>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <div>
+                                                <span class="link-title">E-commerce</span>
+                                                <span class="link-description">Démarrez simplement votre boutique en ligne.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-utensils"></i>
+                                            <div>
+                                                <span class="link-title">Site pour Restaurant</span>
+                                                <span class="link-description">Avec commande en ligne et réservation.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-id-card"></i>
+                                            <div>
+                                                <span class="link-title">Site Vitrine</span>
+                                                <span class="link-description">Présentez votre entreprise de manière pro.</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4 class="dropdown-title">À propos de nous</h4>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-building"></i>
+                                            <div>
+                                                <span class="link-title">Qui sommes-nous ?</span>
+                                                <span class="link-description">Découvrez notre mission et notre histoire.</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-users"></i>
+                                            <div>
+                                                <span class="link-title">Nos réseaux sociaux</span>
+                                                <span class="link-description">Suivez-nous pour rester informé.</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li class="nav-item-with-dropdown" data-menu="support">
+                                <a>Support <i class="fas fa-chevron-down"></i></a>
+                                <div class="dropdown-panel" id="support-menu">
+                                    <div class="dropdown-column">
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-question-circle"></i><div><span class="link-title">Centre d'aide (FAQ)</span></div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-book"></i><div><span class="link-title">Documentation</span></div>
+                                        </a>
+                                        <a href="#" class="dropdown-link">
+                                            <i class="fas fa-headset"></i><div><span class="link-title">Contacter le support</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </span>
+                        
+                        <li><a href="auth.html" class="nav-cta">Connexion / Inscription</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-panel sub-nav-panel">
+                    <div class="mobile-back-button">
+                        <i class="fas fa-chevron-left"></i> <span id="mobile-nav-title">Menu</span>
+                    </div>
+                    <div class="sub-nav-content">
+                        </div>
+                </div>
+            </div>
+
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+
+        </div>
+
+        <div class="dropdown-mega-menu">
+            <div class="container dropdown-content-container">
+                </div>
+        </div>
+    </nav>
+
+    <main class="offers-page">
+        <header class="offers-header">
+            <div class="container">
+                <h1>Nos Solutions Digitales</h1>
+                <p>Découvrez notre gamme complète de services conçus pour propulser votre présence en ligne. Des noms de domaine aux solutions d'hébergement avancées, nous avons tout ce qu'il vous faut.</p>
+            </div>
+        </header>
+            <!-- Header Section -->
+        <section class="container">
+            <div class="section-header">
+                <h2>Découvrez nos <span class="highlight">solutions sur mesure</span></h2>
+                <p class="section-subtitle">Des services pensés pour propulser vos projets, de l'idée à la mise en production.</p>
+            </div>
+
+            <!-- Navigation par onglets -->
+            <div class="offers-nav">
+                <button class="offer-tab-btn active" data-target="domaines"><i class="fas fa-globe"></i> Noms de domaine</button>
+                <button class="offer-tab-btn" data-target="hebergement"><i class="fas fa-server"></i> Hébergement Web</button>
+                <button class="offer-tab-btn" data-target="vps"><i class="fas fa-hdd"></i> Serveurs VPS</button>
+                <button class="offer-tab-btn" data-target="api-chatbot"><i class="fas fa-robot"></i> API Chatbot</button>
+            </div>
+
+            <!-- Contenu des onglets -->
+            <div class="offers-content">
+
+                <!-- Panel: Noms de domaine -->
+                <div id="domaines" class="offer-panel active">
+                    <div class="section-header">
+                        <h3>Trouvez le nom de domaine parfait</h3>
+                        <p class="section-subtitle">Votre identité en ligne commence ici. Simple, rapide et sécurisé.</p>
+                    </div>
+                    <div class="domain-search-container">
+                        <form class="domain-search-form">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Ex: mon-super-site.sn" />
+                            <button type="submit">Rechercher</button>
+                        </form>
+                    </div>
+                    <div class="tld-pricing">
+                        <div class="tld-item"><span>.sn</span> 12 000 FCFA/an</div>
+                        <div class="tld-item"><span>.com</span> 8 500 FCFA/an</div>
+                        <div class="tld-item"><span>.org</span> 9 000 FCFA/an</div>
+                        <div class="tld-item"><span>.net</span> 9 000 FCFA/an</div>
+                    </div>
+                </div>
+
+                <!-- Panel: Hébergement Web -->
+                <div id="hebergement" class="offer-panel">
+                    <div class="section-header">
+                        <h3>Hébergement Web Fiable et Performant</h3>
+                        <p class="section-subtitle">Des solutions optimisées pour la vitesse et la sécurité de votre site.</p>
+                    </div>
+                    <div class="pricing-table">
+                        <div class="pricing-card">
+                            <h3>Essentiel</h3>
+                            <div class="price">3 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> 1 Site Web</li>
+                                <li><i class="fas fa-check"></i> 10 GB Espace SSD</li>
+                                <li><i class="fas fa-check"></i> 100 GB Bande Passante</li>
+                                <li><i class="fas fa-check"></i> 10 Bases de données</li>
+                                <li><i class="fas fa-check"></i> SSL Gratuit (Let's Encrypt)</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Choisir ce plan</a>
+                        </div>
+                        <div class="pricing-card popular">
+                            <div class="popular-badge">POPULAIRE</div>
+                            <h3>Performance</h3>
+                            <div class="price">7 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> 5 Sites Web</li>
+                                <li><i class="fas fa-check"></i> 50 GB Espace SSD</li>
+                                <li><i class="fas fa-check"></i> Bande Passante Illimitée</li>
+                                <li><i class="fas fa-check"></i> Bases de données Illimitées</li>
+                                <li><i class="fas fa-check"></i> SSL Gratuit (Let's Encrypt)</li>
+                                <li><i class="fas fa-check"></i> E-mails professionnels</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Choisir ce plan</a>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>Entreprise</h3>
+                            <div class="price">15 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Sites Web Illimités</li>
+                                <li><i class="fas fa-check"></i> 100 GB Espace SSD</li>
+                                <li><i class="fas fa-check"></i> Bande Passante Illimitée</li>
+                                <li><i class="fas fa-check"></i> Bases de données Illimitées</li>
+                                <li><i class="fas fa-check"></i> E-mails professionnels</li>
+                                <li><i class="fas fa-check"></i> Support Prioritaire</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Choisir ce plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel: Serveurs VPS -->
+                <div id="vps" class="offer-panel">
+                    <div class="section-header">
+                        <h3>Puissance et Flexibilité avec nos VPS</h3>
+                        <p class="section-subtitle">Prenez le contrôle total de votre environnement avec nos serveurs privés virtuels.</p>
+                    </div>
+                    <div class="pricing-table">
+                        <div class="pricing-card">
+                            <h3>VPS Starter</h3>
+                            <div class="price">12 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-microchip"></i> 2 vCPU Cores</li>
+                                <li><i class="fas fa-memory"></i> 4 GB Mémoire RAM</li>
+                                <li><i class="fas fa-hdd"></i> 50 GB SSD NVMe</li>
+                                <li><i class="fas fa-network-wired"></i> 2 TB Bande Passante</li>
+                                <li><i class="fas fa-user-shield"></i> Accès Root complet</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Déployer</a>
+                        </div>
+                        <div class="pricing-card popular">
+                            <div class="popular-badge">RECOMMANDÉ</div>
+                            <h3>VPS Pro</h3>
+                            <div class="price">24 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-microchip"></i> 4 vCPU Cores</li>
+                                <li><i class="fas fa-memory"></i> 8 GB Mémoire RAM</li>
+                                <li><i class="fas fa-hdd"></i> 100 GB SSD NVMe</li>
+                                <li><i class="fas fa-network-wired"></i> 5 TB Bande Passante</li>
+                                <li><i class="fas fa-user-shield"></i> Accès Root complet</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Déployer</a>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>VPS Expert</h3>
+                            <div class="price">45 900 FCFA<span>/mois</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-microchip"></i> 8 vCPU Cores</li>
+                                <li><i class="fas fa-memory"></i> 16 GB Mémoire RAM</li>
+                                <li><i class="fas fa-hdd"></i> 200 GB SSD NVMe</li>
+                                <li><i class="fas fa-network-wired"></i> 10 TB Bande Passante</li>
+                                <li><i class="fas fa-user-shield"></i> Accès Root complet</li>
+                            </ul>
+                            <a href="#" class="offre-button primary">Déployer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel: API Chatbot -->
+                <div id="api-chatbot" class="offer-panel">
+                     <div class="section-header">
+                        <h3>Intégrez une IA conversationnelle à vos services</h3>
+                        <p class="section-subtitle">Une API simple et puissante pour créer des chatbots intelligents et automatiser vos interactions.</p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-cogs"></i>
+                            <h4>Intégration Facile</h4>
+                            <p>Connectez notre API à vos applications en quelques lignes de code.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>Modèles Pré-entraînés</h4>
+                            <p>Utilisez nos modèles pour le service client, la vente, le support technique et plus.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h4>Tarification Flexible</h4>
+                            <p>Payez uniquement ce que vous consommez avec notre modèle basé sur l'usage.</p>
+                        </div>
+                    </div>
+                     <div class="text-center" style="margin-top: 40px;">
+                        <a href="#" class="offre-button primary large">Découvrir l'API & Tarifs</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section FAQ -->
+        <section class="container faq-section">
+            <div class="section-header">
+                <h2>Questions <span class="highlight">Fréquentes</span></h2>
+                <p class="section-subtitle">Trouvez les réponses aux questions les plus courantes sur nos services.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quelle est la différence entre l'hébergement web et un VPS ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>L'hébergement web mutualisé est une solution économique où vous partagez les ressources d'un serveur avec d'autres utilisateurs. C'est idéal pour les blogs, portfolios et petits sites. Un VPS (Serveur Privé Virtuel) vous offre des ressources dédiées et un contrôle total (accès root), ce qui est parfait pour les sites à fort trafic, les applications web complexes et les projets nécessitant une configuration personnalisée.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Proposez-vous des certificats SSL ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui ! Tous nos plans d'hébergement web incluent des certificats SSL gratuits via Let's Encrypt, qui s'installent et se renouvellent automatiquement. Cela sécurise la connexion entre votre site et vos visiteurs (HTTPS) et améliore votre référencement.</p>
+                    </div>
+                </div>
+                 <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Puis-je changer de plan plus tard ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument. Vous pouvez mettre à niveau votre plan d'hébergement ou de VPS à tout moment depuis votre espace client, sans interruption de service. Notre système est conçu pour évoluer avec vos besoins.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column about">
+                    <img src="assets/images/bammiteLogo.png" alt="Sanarois Logo" class="footer-logo">
+                    <p>Solutions digitales innovantes pour propulser votre présence en ligne. Du nom de domaine à l'application sur mesure.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Noms de domaine</a></li>
+                        <li><a href="#">Hébergement Web</a></li>
+                        <li><a href="#">Serveurs VPS</a></li>
+                        <li><a href="#">API Chatbot</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contacter le support</a></li>
+                        <li><a href="#">Centre d'aide (FAQ)</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bammite Services. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/navbar.js"></script>
+    <script src="js/offres.js"></script>
+</body>
+</html>

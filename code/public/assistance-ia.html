@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanarois - Assistance IA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/generale.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="icon" href="assets/svg/logoAttic.svg" type="image/svg+xml">
+</head>
+<body class="chat-page">
+
+
+    <!-- Chat Container -->
+    <main class="chat-container">
+        <!-- Sidebar -->
+        <aside class="chat-sidebar glass-sidebar">
+            <div class="sidebar-header">
+                <img src="assets/svg/logoAttic.svg" alt="Sanarois Logo" class="sidebar-logo">
+                <h2>Sanarois IA</h2>
+            </div>
+            
+            <button id="new-chat-btn" class="sidebar-btn primary">
+                <i class="fas fa-plus"></i>
+                <span>Nouvelle conversation</span>
+            </button>
+            
+            <div class="conversations-list">
+                <h3>Historique</h3>
+                <div id="conversations-container">
+                    <!-- Les conversations seront chargées ici dynamiquement -->
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="settings-btn" class="sidebar-btn">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </button>
+                <a href="index.html" class="sidebar-btn">
+                    <i class="fas fa-home"></i>
+                    <span>Retour à l'accueil</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Chat Main Area -->
+        <section class="chat-main">
+            <!-- Messages Container -->
+            <div class="messages-container" id="messages-container">
+                <!-- Message d'accueil par défaut -->
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            <p>Bonjour ! Je suis l'assistant IA de Sanarois. Comment puis-je vous aider aujourd'hui ?</p>
+                        </div>
+                        <div class="message-time">
+                            <span>Aujourd'hui</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container glass-input">
+                <button class="attachment-btn" id="attachment-btn">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <div class="input-wrapper">
+                    <textarea 
+                        id="message-input" 
+                        placeholder="Écrivez votre message..." 
+                        rows="1"
+                        spellcheck="false"></textarea>
+                    <div class="input-hints">
+                        <small>Appuyez sur <kbd>Shift</kbd> + <kbd>Enter</kbd> pour aller à la ligne</small>
+                    </div>
+                </div>
+                <button class="send-btn" id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-content glass-modal">
+            <div class="modal-header">
+                <h3>Paramètres du Chat</h3>
+                <button class="close-modal" id="close-settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-option">
+                    <label for="theme-select">Thème :</label>
+                    <select id="theme-select">
+                        <option value="light">Clair</option>
+                        <option value="dark">Sombre</option>
+                        <option value="system">Système</option>
+                    </select>
+                </div>
+                <div class="setting-option">
+                    <input type="checkbox" id="typing-indicator" checked>
+                    <label for="typing-indicator">Afficher l'indicateur de frappe</label>
+                </div>
+                <button id="clear-history" class="danger-btn">
+                    <i class="fas fa-trash"></i>
+                    Effacer l'historique
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Upload Modal -->
+    <input type="file" id="file-upload" style="display: none;" multiple>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/chat.js"></script>
+</body>
+</html>

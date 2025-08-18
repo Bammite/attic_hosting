@@ -1,0 +1,32 @@
+/* Base Styles generale.css */
+:root {
+    --primary-color: hsl(239, 78%, 20%);
+    --primary-color-opacity:rgba(15, 16, 104, 0.24);
+    --secondary-color: #64c9ff;
+    --accent-color: #fa6f25;
+    --dark-color: #1A1A2E;
+    --light-color: #f8f9fa;
+    --text-color: #333333;
+    --text-light: #777777;
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inria Sans', sans-serif;
+    font-style: normal;
+    transition: all .4s;   
+    color: var(--text-color);
+    background-color: var(--light-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}

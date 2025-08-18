@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification - Sanarois Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/generale.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="icon" href="assets/svg/logoAttic.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-toggle">
+                <button id="show-login" class="active">Connexion</button>
+                <button id="show-signup">Inscription</button>
+            </div>
+
+            <!-- Formulaire de Connexion -->
+            <form id="login-form" class="auth-form active">
+                <div class="form-header">
+                    <img src="assets/svg/logoAttic.svg" alt="Sanarois Logo" class="form-logo">
+                    <h2>Bienvenue !</h2>
+                    <p>Connectez-vous pour accéder à votre espace.</p>
+                </div>
+                <div class="form-group">
+                    <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="login-email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fas fa-lock"></i> Mot de passe</label>
+                    <input type="password" id="login-password" placeholder="Votre mot de passe" required>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
+                    <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="auth-button">Se connecter</button>
+                <p class="switch-form-text">
+                    Pas encore de compte ? <a href="#" id="go-to-signup">Inscrivez-vous</a>
+                </p>
+                 <div class="social-login">
+                    <p>Ou connectez-vous avec</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
+                        <!-- <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a> -->
+                        <!-- <a href="#" class="social-icon github"><i class="fab fa-github"></i></a> -->
+                    </div>
+                </div>
+            </form>
+
+            <!-- Formulaire d'Inscription -->
+            <form id="signup-form" class="auth-form">
+                <div class="form-header">
+                    <img src="assets/svg/logoAttic.svg" alt="Sanarois Logo" class="form-logo">
+                    <h2>Créez votre compte</h2>
+                    <p>Rejoignez la communauté Sanarois.</p>
+                </div>
+                <div class="form-group">
+                    <label for="signup-username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
+                    <input type="text" id="signup-username" placeholder="Choisissez un nom d'utilisateur" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signup-email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password"><i class="fas fa-lock"></i> Mot de passe</label>
+                    <input type="password" id="signup-password" placeholder="Créez un mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password"><i class="fas fa-lock"></i> Confirmer le mot de passe</label>
+                    <input type="password" id="signup-confirm-password" placeholder="Confirmez votre mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user-cog"></i> Profil</label>
+                    <div class="radio-group">
+                        <span>Êtes-vous un développeur ?</span>
+                        <label><input type="radio" name="isDeveloper" value="yes" required> Oui</label>
+                        <label><input type="radio" name="isDeveloper" value="no"> Non</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user-graduate"></i> Statut</label>
+                    <div class="radio-group">
+                        <span>Êtes-vous étudiant ?</span>
+                        <label><input type="radio" name="isStudent" value="yes" id="isStudentYes" required> Oui</label>
+                        <label><input type="radio" name="isStudent" value="no" id="isStudentNo"> Non</label>
+                    </div>
+                </div>
+                <!-- Champ pour sélectionner l'établissement principal -->
+                <div class="form-group hidden-field" id="establishment-select-group">
+                    <label for="signup-establishment"><i class="fas fa-university"></i> Établissement d'enseignement</label>
+                    <select id="signup-establishment" name="establishment">
+                        <option value="" disabled selected>Sélectionnez votre établissement</option>
+                        <option value="UGB">Université Gaston Berger de Saint-Louis (UGB)</option>
+                        <option value="UCAD">Université Cheikh Anta Diop de Dakar (UCAD)</option>
+                        <option value="UADB">Université Alioune Diop de Bambey (UADB)</option>
+                        <option value="UASZ">Université Assane Seck de Ziguinchor (UASZ)</option>
+                        <option value="UAM">Université Amadou Mahtar Mbow (UAM)</option>
+                        <option value="USSEIN">Université du Sine Saloum El-Hâdj Ibrahima NIASS (USSEIN)</option>
+                        <option value="UVS">Université Virtuelle du Sénégal (UVS)</option>
+                        <option value="AUTRE_PUBLIC">Autre établissement public</option>
+                        <option value="PRIVE">Établissement privé</option>
+                        <option value="AUTRE">Autre (Précisez ci-dessous)</option>
+                    </select>
+                </div>
+                <!-- Champ spécifique pour les UFR de l'UGB -->
+                <div class="form-group hidden-field" id="ugb-ufr-group">
+                    <label for="signup-ugb-ufr"><i class="fas fa-graduation-cap"></i> UFR/Institut (UGB)</label>
+                    <select id="signup-ugb-ufr" name="ugb_ufr">
+                        <option value="" disabled selected>Sélectionnez votre UFR/Institut</option>
+                        <option value="UFR SAT">UFR des Sciences Appliquées et de Technologie (SAT)</option>
+                        <option value="UFR LSH">UFR des Lettres et Sciences Humaines (LSH)</option>
+                        <option value="UFR SEG">UFR des Sciences Économiques et de Gestion (SEG)</option>
+                        <option value="UFR SJP">UFR des Sciences Juridiques et Politiques (SJP)</option>
+                        <option value="UFR 2S">UFR des Sciences de la Santé (2S)</option>
+                        <option value="UFR CRAC">UFR des Civilisations, Religions, Arts et Communication (CRAC)</option>
+                        <option value="UFR S2ATA">UFR des Sciences Agronomiques, de l'Aquaculture et des Technologies Alimentaires (S2ATA)</option>
+                        <option value="IPSL">Institut Polytechnique de Saint-Louis (IPSL)</option>
+                        <option value="autre">Autre UFR/Institut à l'UGB</option>
+                    </select>
+                </div>
+                <!-- Champ pour préciser le nom d'un autre établissement -->
+                <div class="form-group hidden-field" id="other-establishment-name-group">
+                    <label for="signup-other-establishment-name"><i class="fas fa-school"></i> Nom de votre établissement</label>
+                    <input type="text" id="signup-other-establishment-name" name="other_establishment_name" placeholder="Ex: Institut Polytechnique de Dakar">
+                </div>
+                 <div class="form-options">
+                    <label><input type="checkbox" name="terms" required> J'accepte les <a href="#">termes et conditions</a></label>
+                </div>
+                <button type="submit" class="auth-button">S'inscrire</button>
+                <p class="switch-form-text">
+                    Déjà un compte ? <a href="#" id="go-to-login">Connectez-vous</a>
+                </p>
+            </form>
+            <div class="back-to-home">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>

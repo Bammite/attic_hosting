@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanarois - Nos Offres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/svg/logoAttic.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-color: hsl(239, 78%, 20%);
+            --primary-light: hsl(239, 78%, 35%);
+            --secondary-color: #64c9ff;
+            --accent-color: #fa6f25;
+            --dark-color: #1A1A2E;
+            --light-color: #f8f9fa;
+            --text-color: #333333;
+            --text-light: #777777;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --card-bg: #ffffff;
+        }
+
+        .dark-theme {
+            --light-color: #1A1A2E;
+            --card-bg: #16213E;
+            --text-color: #f8f9fa;
+            --text-light: #aaaaaa;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .offers-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .offers-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .offers-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0 50px;
+        }
+
+        .category-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-light);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .category-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .search-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .domain-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .domain-search input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .domain-search input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .domain-search button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .domain-search button:hover {
+            background: #e05e1f;
+            transform: translateY(-2px);
+        }
+
+        .tld-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tld-badge {
+            background: #f0f8ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid #ddd;
+        }
+
+        .tld-badge:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        /* Offers Section */
+        .offers-container {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .offer-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .card-price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .card-body {
+            padding: 25px 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list i {
+            color: var(--accent-color);
+        }
+
+        .card-footer {
+            padding: 0 20px 25px;
+            text-align: center;
+        }
+
+        .btn-select {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-select:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .offers-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .category-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .category-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .domain-search {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .offers-header h1 {
+                font-size: 2rem;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="offers-header">
+        <div class="container">
+            <h1>Nos Solutions Digitales</h1>
+            <p>Découvrez notre gamme complète de services conçus pour propulser votre présence en ligne. Des noms de domaine aux solutions d'hébergement avancées, nous avons tout ce qu'il vous faut.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <button class="category-btn active" data-category="domains">
+                <i class="fas fa-globe"></i> Noms de domaine
+            </button>
+            <button class="category-btn" data-category="hosting">
+                <i class="fas fa-server"></i> Hébergement Web
+            </button>
+            <button class="category-btn" data-category="vps">
+                <i class="fas fa-cloud"></i> Serveurs VPS
+            </button>
+            <button class="category-btn" data-category="chatbot">
+                <i class="fas fa-robot"></i> API Chatbot
+            </button>
+        </div>
+
+        <!-- Domain Search Section -->
+        <div class="search-section" id="domainSearch">
+            <h2 class="search-title">Trouvez le nom de domaine parfait</h2>
+            <div class="domain-search">
+                <input type="text" placeholder="Recherchez votre nom de domaine..." id="domainInput">
+                <button id="searchDomain">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </div>
+            <div class="tld-suggestions">
+                <span class="tld-badge">.com</span>
+                <span class="tld-badge">.fr</span>
+                <span class="tld-badge">.io</span>
+                <span class="tld-badge">.net</span>
+                <span class="tld-badge">.org</span>
+                <span class="tld-badge">.ai</span>
+                <span class="tld-badge">.tech</span>
+                <span class="tld-badge">.store</span>
+            </div>
+        </div>
+
+        <!-- Domain Offers Section -->
+        <section class="offers-container" id="domainsSection">
+            <h2 class="section-title">Nos offres de noms de domaine</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Basique</h3>
+                        <div class="card-price">9,99€<span>/an</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Enregistrement de domaine .com</li>
+                            <li><i class="fas fa-check-circle"></i> Gestion DNS complète</li>
+                            <li><i class="fas fa-check-circle"></i> Protection de la vie privée</li>
+                            <li><i class="fas fa-check-circle"></i> Renouvellement facile</li>
+                            <li><i class="fas fa-check-circle"></i> Redirection email</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="popular-badge">Le plus populaire</div>
+                    <div class="card-header">
+                        <h3 class="card-title">Premium</h3>
+                        <div class="card-price">14,99€<span>/an</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Toutes les fonctionnalités Basique</li>
+                            <li><i class="fas fa-check-circle"></i> Certificat SSL gratuit</li>
+                            <li><i class="fas fa-check-circle"></i> Protection contre le vol</li>
+                            <li><i class="fas fa-check-circle"></i> Sous-domaines illimités</li>
+                            <li><i class="fas fa-check-circle"></i> Service client prioritaire</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Business</h3>
+                        <div class="card-price">24,99€<span>/an</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Toutes les fonctionnalités Premium</li>
+                            <li><i class="fas fa-check-circle"></i> Email professionnel inclus</li>
+                            <li><i class="fas fa-check-circle"></i> Service DNS avancé</li>
+                            <li><i class="fas fa-check-circle"></i> Sauvegardes quotidiennes</li>
+                            <li><i class="fas fa-check-circle"></i> Assistance 24/7</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hosting Offers Section -->
+        <section class="offers-container" id="hostingSection" style="display: none;">
+            <h2 class="section-title">Nos offres d'hébergement web</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Starter</h3>
+                        <div class="card-price">4,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 10 GB d'espace disque</li>
+                            <li><i class="fas fa-check-circle"></i> 1 site web</li>
+                            <li><i class="fas fa-check-circle"></i> 100 GB de bande passante</li>
+                            <li><i class="fas fa-check-circle"></i> Base de données MySQL</li>
+                            <li><i class="fas fa-check-circle"></i> Certificat SSL gratuit</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="popular-badge">Le plus populaire</div>
+                    <div class="card-header">
+                        <h3 class="card-title">Pro</h3>
+                        <div class="card-price">9,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 50 GB d'espace disque</li>
+                            <li><i class="fas fa-check-circle"></i> Sites web illimités</li>
+                            <li><i class="fas fa-check-circle"></i> Bande passante illimitée</li>
+                            <li><i class="fas fa-check-circle"></i> Bases de données illimitées</li>
+                            <li><i class="fas fa-check-circle"></i> Sauvegardes quotidiennes</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Business</h3>
+                        <div class="card-price">19,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 200 GB d'espace disque SSD</li>
+                            <li><i class="fas fa-check-circle"></i> Sites web illimités</li>
+                            <li><i class="fas fa-check-circle"></i> Ressources dédiées</li>
+                            <li><i class="fas fa-check-circle"></i> CDN inclus</li>
+                            <li><i class="fas fa-check-circle"></i> Assistance prioritaire</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VPS Offers Section -->
+        <section class="offers-container" id="vpsSection" style="display: none;">
+            <h2 class="section-title">Nos offres de serveurs VPS</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">VPS Start</h3>
+                        <div class="card-price">14,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 2 vCPU</li>
+                            <li><i class="fas fa-check-circle"></i> 2 GB RAM</li>
+                            <li><i class="fas fa-check-circle"></i> 40 GB SSD</li>
+                            <li><i class="fas fa-check-circle"></i> 2 TB de bande passante</li>
+                            <li><i class="fas fa-check-circle"></i> Accès root complet</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="popular-badge">Le plus populaire</div>
+                    <div class="card-header">
+                        <h3 class="card-title">VPS Pro</h3>
+                        <div class="card-price">29,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 4 vCPU</li>
+                            <li><i class="fas fa-check-circle"></i> 8 GB RAM</li>
+                            <li><i class="fas fa-check-circle"></i> 100 GB SSD</li>
+                            <li><i class="fas fa-check-circle"></i> 5 TB de bande passante</li>
+                            <li><i class="fas fa-check-circle"></i> Sauvegardes automatiques</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">VPS Enterprise</h3>
+                        <div class="card-price">59,99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 8 vCPU</li>
+                            <li><i class="fas fa-check-circle"></i> 16 GB RAM</li>
+                            <li><i class="fas fa-check-circle"></i> 200 GB SSD</li>
+                            <li><i class="fas fa-check-circle"></i> Bande passante illimitée</li>
+                            <li><i class="fas fa-check-circle"></i> Support 24/7</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot Offers Section -->
+        <section class="offers-container" id="chatbotSection" style="display: none;">
+            <h2 class="section-title">Nos offres d'API Chatbot</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Basic Bot</h3>
+                        <div class="card-price">49€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 1,000 requêtes/mois</li>
+                            <li><i class="fas fa-check-circle"></i> Support multi-plateforme</li>
+                            <li><i class="fas fa-check-circle"></i> Intégration simple</li>
+                            <li><i class="fas fa-check-circle"></i> Réponses prédéfinies</li>
+                            <li><i class="fas fa-check-circle"></i> Support email</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="popular-badge">Le plus populaire</div>
+                    <div class="card-header">
+                        <h3 class="card-title">Pro Bot</h3>
+                        <div class="card-price">99€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> 5,000 requêtes/mois</li>
+                            <li><i class="fas fa-check-circle"></i> Apprentissage automatique</li>
+                            <li><i class="fas fa-check-circle"></i> Personnalisation avancée</li>
+                            <li><i class="fas fa-check-circle"></i> Intégration CRM</li>
+                            <li><i class="fas fa-check-circle"></i> Support chat</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Enterprise Bot</h3>
+                        <div class="card-price">249€<span>/mois</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Requêtes illimitées</li>
+                            <li><i class="fas fa-check-circle"></i> Intelligence artificielle avancée</li>
+                            <li><i class="fas fa-check-circle"></i> Support multi-langues</li>
+                            <li><i class="fas fa-check-circle"></i> Analytics en temps réel</li>
+                            <li><i class="fas fa-check-circle"></i> Support 24/7 dédié</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-select">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <script>
+        // DOM Elements
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const sections = {
+            domains: document.getElementById('domainsSection'),
+            hosting: document.getElementById('hostingSection'),
+            vps: document.getElementById('vpsSection'),
+            chatbot: document.getElementById('chatbotSection')
+        };
+        const domainSearchSection = document.getElementById('domainSearch');
+        const themeToggle = document.getElementById('themeToggle');
+        const domainInput = document.getElementById('domainInput');
+        const searchDomainBtn = document.getElementById('searchDomain');
+        const tldBadges = document.querySelectorAll('.tld-badge');
+
+        // Category Switching
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Hide all sections
+                Object.values(sections).forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const category = btn.dataset.category;
+                sections[category].style.display = 'block';
+                
+                // Show domain search only for domains category
+                if (category === 'domains') {
+                    domainSearchSection.style.display = 'block';
+                } else {
+                    domainSearchSection.style.display = 'none';
+                }
+            });
+        });
+
+        // TLD Badges
+        tldBadges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                const domain = domainInput.value.trim();
+                const tld = badge.textContent;
+                
+                if (domain) {
+                    domainInput.value = domain + tld;
+                } else {
+                    domainInput.value = 'votredomaine' + tld;
+                }
+            });
+        });
+
+        // Domain Search
+        searchDomainBtn.addEventListener('click', () => {
+            const domain = domainInput.value.trim();
+            
+            if (!domain) {
+                alert('Veuillez entrer un nom de domaine');
+                return;
+            }
+            
+            // Simulate domain search
+            const available = Math.random() > 0.3;
+            
+            if (available) {
+                alert(`Félicitations ! Le domaine ${domain} est disponible.`);
+            } else {
+                alert(`Désolé, le domaine ${domain} est déjà pris. Veuillez essayer une autre extension.`);
+            }
+        });
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Simulate domain availability check on Enter key
+        domainInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchDomainBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

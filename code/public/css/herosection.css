@@ -1,0 +1,326 @@
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding-top: 80px;
+    background: linear-gradient(135deg, rgb(5, 39, 112));
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.6;
+    display: none;
+}
+
+.particles-background {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 90vh;
+}
+
+.hero-text {
+    /* flex: 1; */
+    max-width: 800px;
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.textNDD {
+    font-size: 1.5rem;
+    max-width: 560px;
+}
+
+.nomDedomaine{
+    width: 30vw;
+    min-width: 400px;
+}
+
+.nomDedomaine form {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+}
+
+.nomDedomaine form input{
+    border: none;
+    padding: 10px;
+    width: 800px;
+    max-width: 80%;
+    height: 100%;
+}
+/* changer la couleur du placeholder */
+.nomDedomaine form input::placeholder {
+    color: rgba(0, 0, 0, 0.513);
+}
+
+/* enlever la bordur lors du focus */
+.nomDedomaine form input:focus {
+    outline: none;
+    border: none;
+}
+
+.nomDedomaine form button{
+    width: 150px;
+    padding: 12px 15px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-radius: 7px;
+    font-weight: 800;
+}
+
+.promotionPrix p span{
+    font-weight: 800;
+    color: var(--accent-color);
+    font-size: 3.5rem;
+}
+
+.promotionPrix{
+    
+    font-size: 1.5rem;
+}
+
+.cloud{
+    position: absolute;
+    top: 80px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    display: none;
+}
+
+.cloud img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Mi-cloud{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 200px;
+}
+
+.Mi-cloud img{
+    object-fit: cover;
+    height: 100%;
+}
+
+.gradient-text {
+    color: var(--light-color);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.typing-animation{
+    display: inline;
+    max-width:min-content;
+    color: black;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.cta-button {
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+    width: 290px;
+}
+
+.cta-button i {
+    font-size: 0.9rem;
+}
+
+
+
+.primary {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 5px 20px rgba(74, 0, 224, 0.3);
+}
+
+.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(74, 0, 224, 0.4);
+}
+
+.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 90vw;
+    overflow: hidden;
+}
+
+.hero-image img{
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.floating-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    opacity: 0.7;
+    z-index: 10;
+}
+
+.scroll-indicator span {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.mouse {
+    width: 25px;
+    height: 40px;
+    border: 2px solid var(--light-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.wheel {
+    width: 5px;
+    height: 8px;
+    background-color: var(--light-color);
+    border-radius: 3px;
+    animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(10px); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        height: 90vh;
+    }
+    
+    .hero-text {
+        margin-bottom: 50px;
+        max-width: 100%;
+        height: 60vh;
+        justify-content: space-between;
+
+    }
+
+    .textNDD {
+        font-size: 1.5rem;
+        width: 100vw;
+        max-width: none;
+        padding: 30px;
+    }
+    .nomDedomaine{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .nomDedomaine form {
+        display: flex;
+        width: 90%;
+        max-width: 800px;
+        background-color: white;
+        padding: 10px 10px 10px 10px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+}
