@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/generale.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="./css/herosection.css">
     <link rel="icon" href="assets/svg/logoAttic.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./css/chatbot.css">
+    <link rel="stylesheet" href="css/generale.css">
     <style>
         /* Nouveaux styles pour la refonte */
         .hosting-benefits {
@@ -241,24 +241,24 @@
 </head>
 <body>
     <div class="chatbot_icon" id="chatbot_icon">
-            <img src="./assets/svg/chat_icon.svg" alt="">
+        <img src="./assets/svg/chat_icon.svg" alt="">
+    </div>
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <a href="./assistance-ia.html" target="_blank">
+                <img src="./assets/svg/extende.svg" alt="Agrandir">
+            </a>
+            <h3>Discuter avec l'assistant</h3>
+            <span id="close-chatbot" class="close-chatbot">&times;</span>
         </div>
-        <div id="chatbot-container" class="chatbot-container">
-            <div class="chatbot-header">
-                <a href="./assistance-ia.html" target="_blank">
-                    <img src="./assets/svg/extende.svg" alt="Agrandir">
-                </a>
-                <h3>Discuter avec l'assistant</h3>
-                <span id="close-chatbot" class="close-chatbot">&times;</span>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="message bot">Bonjour ! Je suis l'assistant de Bens Groupe. Comment puis-je vous aider ?</div>
-            </div>
-            <div class="chatbot-input-area">
-                <input type="text" id="user-input" placeholder="Posez votre question...">
-                <button id="send-btn">Envoyer</button>
-            </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot">Bonjour ! Je suis l'assistant de Bens Groupe. Comment puis-je vous aider ?</div>
         </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="user-input" placeholder="Posez votre question...">
+            <button id="send-btn">Envoyer</button>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="glass-nav">

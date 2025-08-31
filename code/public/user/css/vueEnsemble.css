@@ -1,0 +1,167 @@
+/* /user/css/vueEnsemble.css */
+
+#MesServices{
+
+}
+
+.services-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-add-service {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-add-service:hover {
+    background-color: var(--primary-color-light);
+}
+
+.services-overview-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.service-block {
+    background-color: var(--light-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.service-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.service-block-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-block-title iconify-icon {
+    color: var(--primary-color);
+}
+
+.service-block-title h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.service-block-title span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.service-block-menu {
+    position: relative;
+}
+
+.menu-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 5px);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 10;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.menu-options.active {
+    display: block;
+}
+
+.menu-options a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.menu-options a:hover {
+    background-color: #f5f5f5;
+}
+
+.service-block-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.service-block-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    background-color: #fcfcfc;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.service-block-footer iconify-icon {
+    color: var(--secondary-color);
+}
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.service-item-name {
+    font-weight: 600;
+}
+
+.service-item-type {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    background-color: #e9ecef;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.services-overview-container{
+    margin-bottom: 100px;
+}

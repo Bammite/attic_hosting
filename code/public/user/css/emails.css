@@ -1,0 +1,94 @@
+/* /user/css/emails.css */
+
+#Email .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.email-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-add-email {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-email:hover {
+    background-color: var(--primary-color-light);
+}
+
+.email-list {
+    background-color: var(--light-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.email-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.email-item:last-child {
+    border-bottom: none;
+}
+
+.email-address {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.email-address iconify-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+    color: var(--secondary-color);
+}
+
+.email-storage {
+    color: var(--text-light);
+}
+
+.email-storage .progress-bar {
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    height: 8px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.email-storage .progress {
+    background-color: var(--secondary-color);
+    height: 100%;
+}
+
+.email-domain { font-style: italic; color: #555; }
+
+.email-management button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.email-management button:hover {
+    background-color: #f0f0f0;
+}

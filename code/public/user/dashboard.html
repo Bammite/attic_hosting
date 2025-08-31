@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - bammite</title>
+    <link rel="stylesheet" href="./css/generale.css ">
+    <link rel="stylesheet" href="./css/tableauDeBord.css">
+    <link rel="stylesheet" href="./css/fenetre.css ">
+    <link rel="stylesheet" href="./css/accueil.css">
+    <link rel="stylesheet" href="./css/boiterecption.css">
+    <link rel="stylesheet" href="./css/domaines.css">
+    <link rel="stylesheet" href="./css/emails.css">
+    <link rel="stylesheet" href="./css/vueEnsemble.css">
+    <link rel="stylesheet" href="./css/rapport.css">
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+    <link rel="stylesheet" href="./css/personnele.css ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js" defer></script>
+    <link rel="stylesheet" href="../css/chatbot.css">
+</head>
+<body>
+    <div class="chatbot_icon" id="chatbot_icon">
+        <img src="../assets/svg/chat_icon.svg" alt="">
+    </div>
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <a href="../assistance-ia.html" target="_blank">
+                <img src="../assets/svg/extende.svg" alt="Agrandir">
+            </a>
+            <h3>Discuter avec l'assistant</h3>
+            <span id="close-chatbot" class="close-chatbot">&times;</span>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot">Bonjour ! Je suis l'assistant de Bens Groupe. Comment puis-je vous aider ?</div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="user-input" placeholder="Posez votre question...">
+            <button id="send-btn">Envoyer</button>
+        </div>
+    </div>
+    <button class="menu-btn" id="menuBtn">
+        <img src="./asset/svg/burger.svg" alt="">
+    </button>
+    <div id="modal-publication" class="modal">
+        <div class="modal-content">
+            <span class="close-actualite close-button">&times;</span>
+            <span class="formeModal1 formeAddCollaborateur">
+                <p>Ajouter un collaborateur</p>
+                <form id="personnelForm" enctype="multipart/form-data">
+
+                    <div class="formgroupe">
+                        <input type="text" id="nom-Employe" name="nom" required placeholder="Nom"><br><br>
+                        <input type="text" id="prenom-Employe" name="prenom" required placeholder="Prénom"><br><br>
+                    </div>
+
+                    <input type="email" id="email-Employe" name="email" required placeholder="Email du collaborateur"><br><br>
+                    
+                    <div class="formgroupe">
+                        <select id="role-Employe" name="role" required>
+                            <option value="" disabled selected>Permissions</option>
+                            <option value="admin">Administrateur (Accès total)</option>
+                            <option value="tech">Technique (Gérer les services)</option>
+                            <option value="billing">Facturation (Voir les factures)</option>
+                        </select>
+                    </div>
+            
+                    <label for="photo">Photo (URL) :</label>
+                    <input id="photo-Employe" type="file" accept="image/*" name="photo"><br><br>
+            
+                    <label for="notes">Notes :</label>
+                    <textarea id="notes-Employe" name="notes"></textarea><br><br>
+            
+                    <button type="submit">Inviter le collaborateur</button>
+                </form>
+            </span>
+        </div>
+    </div>
+    <div class="all">
+        <div class="tableauDeBord" id="tableauDeBord">
+            <div class="tableauDeBord__content">
+                <div class="tableauDeBord__header">
+                    <img src="../assets/images/bammiteLogo.png" alt="logo bammite">
+                </div>
+                <!-- Le menu sera généré dynamiquement par icons.js -->
+            </div>
+
+            <div class="tableauDeBord__footer">
+                <a href="#">Centre d'aide</a>
+                <div class="barVerticale"></div>
+                <a href="#">Condition d'utilisation</a>
+            </div>
+        </div>
+
+        <div class="section sc" id="accueil">
+            <div class="enteteAcc">
+                <p id="Salutation">Bonjour, <span class="nomUtilisateur">Bammite</span> !</p>
+            </div>
+            <div class="container">
+                <div class="actualite">
+                    <h2>Actualités</h2>
+                    <div class="news-content" id="newsContent">
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="title_cad">Services actifs</div>
+                    <div class="cadre_contenue">
+                        <div class="service hebergement">
+                            <div>
+                                <iconify-icon icon="mdi:server" width="40" height="40"></iconify-icon>  
+                                <div class="service-info">
+                                    <p>Hébergements web Prenium</p>
+                                    <p><span>Expire le 03-03-2024</span> <span class="barverticale"></span> <span class="stat">3 site web</span></p>
+                                </div>
+                            </div>
+                            <div class="gestion"><button>Gérer</button></div>
+                        </div>
+                        <div class="service VPS">
+                            <div>
+                                <iconify-icon icon="mdi:server" width="40" height="40"></iconify-icon>  
+                                <div class="service-info">
+                                    <p>Hébergements VPS Prenium</p>
+                                    <p><span>Expire le 03-03-2024</span> <span class="barverticale"></span> <span class="stat"></span></p>
+                                </div>
+                            </div>
+                            <div class="gestion"><button>Gérer</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <iconify-icon icon="mdi:web" width="40" height="40"></iconify-icon>
+                    </div>
+                    <div class="card-info">
+                        <h3 id="totalDomaines">0</h3>
+                        <p>Domaines enregistrés</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <iconify-icon icon="mdi:email" width="40" height="40"></iconify-icon>
+                    </div>
+                    <div class="card-info">
+                        <h3 id="totalEmails">0</h3>
+                        <p>Comptes email</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <iconify-icon icon="mdi:credit-card" width="40" height="40"></iconify-icon>
+                    </div>
+                    <div class="card-info">
+                        <h3 id="totalAbonnements">0</h3>
+                        <p>Abonnements actifs</p>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="section sc" id="BtRcp">
+            <h2>Boîte de réception</h2>
+            <div class="inbox-container">
+                <!-- Filtres pour trier les messages -->
+                <div class="inbox-filters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="alert">Alertes</button>
+                    <button class="filter-btn" data-filter="payment">Paiements</button>
+                    <button class="filter-btn" data-filter="subscription">Abonnements</button>
+                </div>
+        
+                <!-- Liste des messages -->
+                <div class="message-list">
+                    <!-- Exemple de message : Abonnement arrivant à expiration -->
+                    <div class="message unread" data-category="subscription">
+                        <div class="message-icon warning">
+                            <iconify-icon icon="mdi:clock-alert-outline" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-subject">Abonnement arrivant à expiration</span>
+                                <span class="message-time">il y a 2 heures</span>
+                            </div>
+                            <p class="message-snippet">Votre hébergement web "Premium" expire dans 5 jours. Pensez à le renouveler pour éviter toute interruption de service.</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn">Renouveler</button>
+                        </div>
+                    </div>
+        
+                    <!-- Exemple de message : Confirmation de paiement -->
+                    <div class="message" data-category="payment">
+                        <div class="message-icon success">
+                            <iconify-icon icon="mdi:check-circle-outline" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-subject">Confirmation de paiement</span>
+                                <span class="message-time">hier</span>
+                            </div>
+                            <p class="message-snippet">Nous avons bien reçu votre paiement de 12 900 FCFA pour la facture #INV-2024-0012. Merci de votre confiance.</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn-secondary">Voir la facture</button>
+                        </div>
+                    </div>
+
+                    <!-- Exemple de message : Alerte de sécurité -->
+                    <div class="message" data-category="alert">
+                        <div class="message-icon danger">
+                            <iconify-icon icon="mdi:alert-outline" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-subject">Alerte de sécurité</span>
+                                <span class="message-time">il y a 2 jours</span>
+                            </div>
+                            <p class="message-snippet">Une nouvelle connexion à votre compte a été détectée depuis un appareil inconnu. Si ce n'était pas vous, veuillez sécuriser votre compte.</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn-secondary">Détails</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section sc" id="MesServices">
+            <h2>Vue d'ensemble des services</h2>
+            <div class="services-actions">
+                <a href="../tarifs.html" class="btn-add-service">
+                    <iconify-icon icon="mdi:plus-circle-outline"></iconify-icon>
+                    Ajouter un service
+                </a>
+            </div>
+            <div class="services-overview-container">
+                <!-- 
+                    Les blocs de service sont générés dynamiquement 
+                    par le script /js/vueEnsemble.js 
+                -->
+            </div>
+        </div>
+
+        <div class="section sc" id="MesDomaines">
+            <h2>Mes domaines</h2>
+            
+            <div class="container">
+                <div class="domain-actions">
+                    <a href="../tarifs.html" class="btn-add-domain">
+                        <iconify-icon icon="mdi:plus-circle-outline"></iconify-icon>
+                        Enregistrer un domaine
+                    </a>
+                </div>
+
+                <div class="domain-list">
+                    <!-- Exemple de domaine -->
+                    <div class="domain-item">
+                        <div class="domain-name">
+                            <iconify-icon icon="mdi:web" width="24"></iconify-icon>
+                            mon-super-site.sn
+                        </div>
+                        <div class="domain-status">
+                            <span class="status-dot active"></span> Actif
+                        </div>
+                        <div class="domain-expiry-date">Expire le 25/12/2024</div>
+                        <div class="domain-management">
+                            <button>Gérer</button>
+                        </div>
+                    </div>
+                    <!-- Autre exemple -->
+                    <div class="domain-item">
+                        <div class="domain-name">
+                            <iconify-icon icon="mdi:web" width="24"></iconify-icon>
+                            bammite-project.com
+                        </div>
+                        <div class="domain-status">
+                            <span class="status-dot expiring"></span> Expire bientôt
+                        </div>
+                        <div class="domain-expiry-date">Expire le 15/07/2024</div>
+                        <div class="domain-management">
+                            <button>Renouveler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section sc" id="Email">
+            <h2>Mes emails</h2>
+            
+            <div class="container">
+                <div class="email-actions">
+                    <button class="btn-add-email">
+                        <iconify-icon icon="mdi:plus-circle-outline"></iconify-icon>
+                        Créer un compte email
+                    </button>
+                </div>
+
+                <div class="email-list">
+                    <!-- Exemple de compte email -->
+                    <div class="email-item">
+                        <div class="email-address">
+                            <iconify-icon icon="mdi:email" width="24"></iconify-icon>
+                            contact@mon-super-site.sn
+                        </div>
+                        <div class="email-storage">
+                            <span>250 Mo / 1 Go</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                        <div class="email-domain">mon-super-site.sn</div>
+                        <div class="email-management">
+                            <button>Gérer</button>
+                        </div>
+                    </div>
+                     <!-- Autre exemple -->
+                     <div class="email-item">
+                        <div class="email-address">
+                            <iconify-icon icon="mdi:email" width="24"></iconify-icon>
+                            admin@bammite-project.com
+                        </div>
+                        <div class="email-storage">
+                            <span>8.5 Go / 10 Go</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="email-domain">bammite-project.com</div>
+                        <div class="email-management">
+                            <button>Gérer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section sc" id="Rapport">
+            <h2 title="TitleRapport">Gestion des Rapports</h2>
+            <div class="rapport-container">
+                <!-- Le contenu de cette section est généré dynamiquement par rapport.js -->
+            </div>
+        </div>
+
+        <div class="section sc" id="Collaborateurs">
+            <h2 class="titre" title="TitleEmployes"><span>Gestion des Collaborateurs</span></h2>
+            <div class="header-employes">
+                <h2><span id="employeeCount">0</span> Collaborateurs</h2>
+                <div class="actions">
+                    <button class="btn-filter">Filtrer</button>
+                    <button class="btn-add" onclick="openModal(modalActu,'formeAddCollaborateur')">+ Ajouter un Collaborateur</button>
+                </div>
+            </div>
+            <div class="employee-grid">
+                <!-- Les cartes des employés seront générées ici dynamiquement -->
+            </div>
+        </div>
+
+
+        <div class="section sc" id="Abonnements">
+            <h2>Abonnements en cours</h2>
+            
+            <div class="container">
+                
+            </div>
+        </div>
+
+        <div class="section sc" id="Historique">
+            <h2>Historique des abonnements</h2>
+            
+            <div class="messages-container">
+                
+            </div>
+        </div>
+
+        <div class="section sc" id="parametre">
+            <h2>Paramètres</h2>
+            
+            <div class="container">
+                
+            </div>
+        </div>
+    </div>
+    <script src="./js/icons.js"></script>
+    <script src="./js/data.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/TableauDebord.js"></script>
+    <script src="./js/form1.js"></script>
+    <script src="../js/chatbot.js"></script>
+    <script src="./js/vueEnsemble.js" defer></script> 
+    <script src="./js/rapport.js" defer></script>
+</body>
+</html>

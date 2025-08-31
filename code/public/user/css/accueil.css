@@ -1,0 +1,210 @@
+
+/************************************************* Section Accueil *****************************************/
+#accueil.active {
+    /* 
+      Correction de la disposition :
+      On passe en `flex-direction: column` pour s'assurer que les blocs principaux 
+      (en-tête et contenu) s'empilent verticalement. C'est plus simple et robuste.
+    */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: #f8f9fa;
+}
+
+/* Style des éléments d'en-tête */
+
+#accueil .enteteAcc p {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #333;
+}
+
+#accueil .enteteAcc .nomUtilisateur {
+    font-weight: 700;
+    color: #000;
+}
+
+/* 
+  Le conteneur de la grille principale. 
+  Les propriétés 'order' et 'flex-basis' ne sont plus nécessaires.
+*/
+#accueil .container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 25px;
+}
+
+/* Style général des cartes */
+#accueil .card,
+#accueil .actualite {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#accueil .card:hover,
+#accueil .actualite:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* Carte Actualités */
+#accueil .actualite {
+    grid-column: span 12;
+    display: flex;
+    flex-direction: column;
+}
+
+#accueil .actualite h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+#accueil .news-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    min-height: 150px; /* Hauteur de base */
+}
+
+/* Carte Services Actifs */
+#accueil .container > .card:nth-child(2) {
+    grid-column: span 12;
+}
+
+#accueil .card .title_cad {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-top: 0;
+}
+
+#accueil .card .cadre_contenue {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#accueil .service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+#accueil .service > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#accueil .service iconify-icon {
+    color: #0d6efd;
+}
+
+#accueil .service-info p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+#accueil .service-info p:first-child {
+    font-weight: 600;
+    color: #212529;
+}
+
+#accueil .service-info span {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+#accueil .service-info .barverticale {
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background-color: #ced4da;
+    margin: 0 8px;
+    vertical-align: middle;
+}
+
+#accueil .gestion button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+#accueil .gestion button:hover {
+    background-color: #0b5ed7;
+}
+
+/* Petites cartes de statistiques */
+#accueil .container > .card:nth-child(n+3) {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+#accueil .card-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#accueil .card:nth-child(3) .card-icon { background-color: #e7f5ff; color: #1c92ff; } /* Domaines */
+#accueil .card:nth-child(4) .card-icon { background-color: #e5f7f3; color: #13c296; } /* Emails */
+#accueil .card:nth-child(5) .card-icon { background-color: #fff4e5; color: #ff9f0e; } /* Abonnements */
+
+#accueil .card-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+#accueil .card-info p {
+    margin: 0;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    #accueil .container > .card:nth-child(n+3) {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 768px) {
+    #accueil.active {
+        padding: 15px;
+        gap: 15px;
+    }
+    #accueil .container > .card:nth-child(n+3) {
+        grid-column: span 12;
+    }
+}

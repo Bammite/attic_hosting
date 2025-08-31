@@ -1,0 +1,93 @@
+/* /user/css/domaines.css */
+
+#MesDomaines .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.domain-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-add-domain {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-add-domain:hover {
+    background-color: var(--primary-color-light);
+}
+
+.domain-list {
+    background-color: var(--light-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.domain-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.domain-item:last-child {
+    border-bottom: none;
+}
+
+.domain-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.domain-name iconify-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+    color: var(--secondary-color);
+}
+
+.domain-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-dot.active { background-color: #28a745; /* Vert */ }
+.status-dot.expiring { background-color: #ffc107; /* Jaune */ }
+.status-dot.expired { background-color: #dc3545; /* Rouge */ }
+
+.domain-expiry-date { color: var(--text-light); }
+
+.domain-management button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.domain-management button:hover {
+    background-color: #f0f0f0;
+}
