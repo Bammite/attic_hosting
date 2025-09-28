@@ -26,58 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // }
     
     // Scroll Effect for Navigation
-    window.addEventListener('scroll', function() {
-        const nav = document.querySelector('.glass-nav');
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-    
-    // Smooth Scrolling for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open et si la largeur de l'ecran est inferieure a 670px
-                if (navLinks && window.getComputedStyle(navLinks).display === 'flex' && window.innerWidth <= 670 ) {
-                    navLinks.style.display = 'none';
-                }
-            }
-        });
-    });
-    
-    // Typing Animation avec configuration améliorée
-    if (typeof Typed !== 'undefined') {
-        new Typed('.typing-animation', {
-            strings: [
-                "Transformez vos idées en services numériques innovants",
-                "Développez des solutions digitales puissantes",
-                "Créez un avenir numérique au pour votre entreprise",
-                "Innovez avec l'agence Bammite"
-            ],
-            typeSpeed: 50,
-            backSpeed: 30,
-            loop: true,
-            showCursor: true,
-            // cursorChar: '|',
-            autoInsertCss: false,
-            smartBackspace: true
-        });
-    }
-    
-    // Initialize Particles.js
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
             particles: {
@@ -212,9 +160,3 @@ document.querySelectorAll('.feature-card, .step, .doc-card').forEach(el => {
     // window.addEventListener('scroll', animateOnScroll);
     // animateOnScroll(); // Run once on load
 });
-
-
-
-
-
-

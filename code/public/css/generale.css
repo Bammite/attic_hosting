@@ -30,3 +30,18 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
+
+/* Classe de base pour les cartes */
+.card-base {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    border: 1px solid #e0e0e0;
+}
+
+.card-base:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}

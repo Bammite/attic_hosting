@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créateur de Formulaire Dynamique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Créateur de Formulaire</h1>
+            <div class="header-actions">
+                <button class="btn-secondary" id="reset-form">Réinitialiser</button>
+                <button class="btn-primary" id="save-form">Sauvegarder</button>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <h2>Champs disponibles</h2>
+            <div class="field-item" data-type="text">
+                <i>📝</i> Texte
+            </div>
+            <div class="field-item" data-type="textarea">
+                <i>📄</i> Long texte
+            </div>
+            <div class="field-item" data-type="email">
+                <i>✉️</i> Email
+            </div>
+            <div class="field-item" data-type="number">
+                <i>🔢</i> Numéro
+            </div>
+            <div class="field-item" data-type="select">
+                <i>📋</i> Liste déroulante
+            </div>
+            <div class="field-item" data-type="checkbox">
+                <i>☑️</i> Cases à cocher
+            </div>
+            <div class="field-item" data-type="radio">
+                <i>🔘</i> Boutons radio
+            </div>
+            <div class="field-item" data-type="date">
+                <i>📅</i> Date
+            </div>
+            <div class="field-item" data-type="file">
+                <i>📎</i> Fichier
+            </div>
+        </aside>
+
+        <main class="workspace">
+            <div class="workspace-header">
+                <h2>Zone de travail</h2>
+                <button class="btn-primary add-field-btn" id="add-field-btn">Ajouter un champ</button>
+            </div>
+            <div class="drop-zone" id="drop-zone">
+                <div class="empty-message">
+                    <p>Commencez par ajouter votre premier champ</p>
+                    <button class="btn-primary add-field-btn" id="add-field-empty-btn" style="margin-top: 15px;">Ajouter un champ</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="properties-panel">
+            <h2>Propriétés du champ</h2>
+            <div id="properties-form" style="display: none;">
+                <div class="form-group">
+                    <label for="field-label">Label</label>
+                    <input type="text" id="field-label" placeholder="Label du champ">
+                </div>
+                <div class="form-group">
+                    <label for="field-placeholder">Placeholder</label>
+                    <input type="text" id="field-placeholder" placeholder="Texte indicatif">
+                </div>
+                <div class="form-group">
+                    <label for="field-required">Obligatoire</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="field-required">
+                        <label for="field-required">Ce champ est obligatoire</label>
+                    </div>
+                </div>
+                <div class="form-group" id="options-group" style="display: none;">
+                    <label>Options</label>
+                    <div class="options-list" id="options-list"></div>
+                    <button type="button" class="btn-add" id="add-option">Ajouter une option</button>
+                </div>
+                <div class="form-group">
+                    <label for="field-help">Aide contextuelle</label>
+                    <textarea id="field-help" placeholder="Description d'aide" rows="3"></textarea>
+                </div>
+            </div>
+            <div id="no-selection-message">
+                Sélectionnez un champ pour modifier ses propriétés
+            </div>
+        </aside>
+
+        <section class="preview-section">
+            <h2>Aperçu du formulaire</h2>
+            <div class="preview-form" id="preview-form">
+                <div class="empty-message">Aucun champ ajouté au formulaire</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal pour les propriétés du champ -->
+    <div class="modal-overlay" id="properties-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="properties-modal-title">Propriétés du champ</h2>
+                <button class="modal-close" id="close-properties-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="properties-modal-body">
+                <!-- Le contenu du formulaire de propriétés sera injecté ici par JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter des champs -->
+    <div class="modal-overlay" id="fields-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Champs disponibles</h2>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="fields-grid">
+                    <div class="field-type" data-type="text">
+                        <div class="field-type-icon">📝</div>
+                        <div class="field-type-name">Texte</div>
+                    </div>
+                    <div class="field-type" data-type="textarea">
+                        <div class="field-type-icon">📄</div>
+                        <div class="field-type-name">Zone de texte</div>
+                    </div>
+                    <div class="field-type" data-type="email">
+                        <div class="field-type-icon">✉️</div>
+                        <div class="field-type-name">Email</div>
+                    </div>
+                    <div class="field-type" data-type="number">
+                        <div class="field-type-icon">🔢</div>
+                        <div class="field-type-name">Numéro</div>
+                    </div>
+                    <div class="field-type" data-type="select">
+                        <div class="field-type-icon">📋</div>
+                        <div class="field-type-name">Liste déroulante</div>
+                    </div>
+                    <div class="field-type" data-type="checkbox">
+                        <div class="field-type-icon">☑️</div>
+                        <div class="field-type-name">Cases à cocher</div>
+                    </div>
+                    <div class="field-type" data-type="radio">
+                        <div class="field-type-icon">🔘</div>
+                        <div class="field-type-name">Boutons radio</div>
+                    </div>
+                    <div class="field-type" data-type="date">
+                        <div class="field-type-icon">📅</div>
+                        <div class="field-type-name">Date</div>
+                    </div>
+                    <div class="field-type" data-type="file">
+                        <div class="field-type-icon">📎</div>
+                        <div class="field-type-name">Fichier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
