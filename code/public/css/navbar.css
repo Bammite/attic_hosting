@@ -217,7 +217,7 @@
 .nav-links li > a, .nav-item-with-dropdown > a {
     color: var(--primary-color); text-decoration: none; font-weight: 500;
     display: flex; align-items: center; gap: 8px;
-    padding: 8px 4px; cursor: pointer; position: relative;
+    padding: 8px 10px; cursor: pointer; position: relative;
     transition: color 0.2s ease;
 }
 .nav-links li > a:hover, .nav-item-with-dropdown > a:hover { color: var(--accent-color); }
@@ -226,7 +226,7 @@
 .nav-item-with-dropdown.active .fa-chevron-down { transform: rotate(180deg); }
 .nav-cta {
     background: var(--primary-color); color: white !important; padding: 10px 25px;
-    border-radius: 30px; font-weight: 500 !important; transition: var(--transition);
+    border-radius: 1 0px; font-weight: 500 !important; transition: var(--transition);
 }
 .nav-cta:hover { background: var(--accent-color); transform: translateY(-2px); }
 

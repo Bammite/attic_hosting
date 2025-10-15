@@ -1,0 +1,104 @@
+  <section class="contacts-section">
+            <div class="contacts-header">
+                <h2 class="contacts-title">Vos contacts</h2>
+                <button class="btn-add-contact">+ nouveau contact</button>
+            </div>
+
+            <div class="contacts-toolbar">
+                <label class="select-all-label">
+                    <input type="checkbox" id="selectAllCheckbox">
+                    Tout cocher
+                </label>
+                
+                <div class="desktop-only">
+                    <input type="search" placeholder="Recherche" class="search-bar">
+                </div>
+
+                <div class="desktop-only bulk-actions">
+                    <button id="bulk-action-send-mail">Envoyer un mail</button>
+                    <button id="bulk-action-send-sms">Envoyer un SMS</button>
+                    <button id="bulk-action-delete">Supprimer</button>
+                </div>
+            </div> 
+            <a href="../user/dashboard.html"></a>
+
+            <ul class="contact-list">
+                <li class="contact-list-item" data-email="ahmed@gamil.co" data-phone="784371193">
+                    <div class="contact-info-mobile">
+                        <input type="checkbox" class="contact-checkbox">
+                        <span>Cabinet Ahmed BA</span>
+                    </div>
+                    <div class="contact-action-mobile">&#9654;</div> </li>
+                <li class="contact-list-item" data-email="yoro@fall.co" data-phone="771234567">
+                    <div class="contact-info-mobile">
+                        <input type="checkbox" class="contact-checkbox">
+                        <span>Yoro Fall</span>
+                    </div>
+                    <div class="contact-action-mobile">&#9654;</div>
+                </li>
+                 <li class="contact-list-item" data-email="mohamed@cheikh.com" data-phone="765432100">
+                    <div class="contact-info-mobile">
+                        <input type="checkbox" class="contact-checkbox">
+                        <span>Mohamed Cheikh</span>
+                    </div>
+                    <div class="contact-action-mobile">&#9654;</div>
+                </li>
+            </ul>
+            <!-- Le contenu sera généré dynamiquement -->
+            <div id="loader-container" class="loader-container"></div>
+            <ul class="contact-list" id="contact-list-mobile"></ul>
+
+            <table class="desktop-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAllCheckboxDesktop"></th>
+                        <th>IdContact</th>
+                        <th>Designation</th>
+                        <th>contact</th>
+                        <th>Description</th>
+                        <th>Date Ajout</th>
+                        <th>Interaction</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-email="ahmed@gamil.co" data-phone="784371193">
+                        <td><input type="checkbox" class="contact-checkbox-desktop"></td>
+                        <td>d3hi9s</td>
+                        <td>Cabinet Ahmed BA</td>
+                        <td class="contact-info-desktop">
+                            <span class="email">ahmed@gamil.co</span>
+                            <span class="phone">784371193</span>
+                        </td>
+                        <td>Client provenant de...</td>
+                        <td>31/08/26</td>
+                        <td>05</td>
+                        <td class="">
+                            <div class="contact-actions-desktop">
+
+                                <span>&#9998;</span> <span>&#9993;</span> <span>&#128172;</span> 
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-email="yoro@fall.co" data-phone="771234567">
+                        <td><input type="checkbox" class="contact-checkbox-desktop"></td>
+                        <td>a6fe5d</td>
+                        <td>Yoro Fall</td>
+                        <td class="contact-info-desktop">
+                             <span class="email">yoro@fall.co</span>
+                            <span class="phone">771234567</span>
+                        </td>
+                        <td>Partenaire commercial</td>
+                        <td>15/07/26</td>
+                        <td>12</td>
+                        <td class="contact-actions-desktop">
+                            <span>&#9998;</span>
+                            <span>&#9993;</span>
+                            <span>&#128172;</span>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- Le contenu sera généré dynamiquement -->
+                <tbody id="contact-list-desktop"></tbody>
+            </table>
+        </section>

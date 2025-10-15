@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="cssMail/composer.css"> 
+    <link rel="stylesheet" href="cssMail/style.css">
+    <title>Gestion des Contacts</title>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-back">
+            <span>&#8592;</span> <span style="font-size: 1.2rem; vertical-align: middle; margin-left: 0.5rem; display: none;" class="desktop-only">Retour</span>
+        </div>
+        <div class="header-options">
+            <span id="options-toggle" class="options-toggle-icon">&#8942;</span>
+            <div id="options-menu" class="options-menu">
+                <a href="./interactions.html">File de discussion</a>
+                <a href="#">Alerte</a>
+                <a href="#">Paramètres</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="quick-actions">
+            <div class="action-item" id="quick-action-send-mail">
+                <div class="icon"></div>
+                <span>Envoyer un mail</span>
+            </div>
+            <div class="action-item" id="quick-action-send-sms">
+                <div class="icon"></div>
+                <span>Envoyer un SMS</span>
+            </div>
+            <a href="./templates.html?template_type=T_mail" class="action-item">
+                <div class="icon"></div>
+                <span>Template mail</span>
+            </a>
+            <div class="action-item">
+                <div class="icon"></div>
+                <span>Template SMS</span>
+            </div>
+            <a href="./interactions.html" class="action-item">
+                <div class="icon"></div>
+                <span>Boîte de reception</span>
+            </a>
+        </section>
+
+        <section class="contacts-section">
+            <div class="contacts-header">
+                <h2 class="contacts-title">Vos contacts</h2>
+                <button class="btn-add-contact" id="add-contact-btn">+ nouveau contact</button>
+            </div>
+
+            <div class="contacts-toolbar">
+                <label class="select-all-label">
+                    <input type="checkbox" id="selectAllCheckbox">
+                    Tout cocher
+                </label>
+                
+                <div class="desktop-only">
+                    <input type="search" placeholder="Recherche" class="search-bar">
+                </div>
+
+                <div class="desktop-only bulk-actions">
+                    <button id="bulk-action-send-mail">Envoyer un mail</button>
+                    <button id="bulk-action-send-sms">Envoyer un SMS</button>
+                    <button id="bulk-action-delete">Supprimer</button>
+                </div>
+            </div>
+
+            <!-- Le contenu sera généré dynamiquement -->
+            <div id="loader-container" class="loader-container"></div>
+            <ul class="contact-list" id="contact-list-mobile"></ul>
+
+            <table class="desktop-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAllCheckboxDesktop"></th>
+                        <th>IdContact</th>
+                        <th>Designation</th>
+                        <th>contact</th>
+                        <th>Description</th>
+                        <th>Date Ajout</th>
+                        <th>Interaction</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <!-- Le contenu sera généré dynamiquement -->
+                <tbody id="contact-list-desktop"></tbody>
+            </table>
+        </section>
+    </div>
+    
+    <script src="./jsMAil/contactModal.js"></script>
+    <script src="./jsMAil/liste_contact.js"></script>
+    <script src="jsMAil/composer.js"></script> <!-- Lien vers le nouveau JS -->
+    <script src="jsMAil/animation.js"></script> <!-- Script pour l'animation -->
+    <script src="jsMAil/script.js"></script>
+    <script src="./jsMAil/modal.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ce script gère les actions qui ne sont pas directement liées à la liste de contacts
+
+            // Actions rapides pour ouvrir le compositeur sans destinataire
+            document.getElementById('quick-action-send-mail').addEventListener('click', () => {
+                openComposer({ type: 'email', recipients: [] });
+            });
+    
+            document.getElementById('quick-action-send-sms').addEventListener('click', () => {
+                openComposer({ type: 'sms', recipients: [] });
+            });
+
+            document.getElementById('add-contact-btn').addEventListener('click', () => {
+                openContactModal();
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </li>
                             </span>
                             
-                            <li><a href="auth.html" class="nav-cta">Connexion / Inscription</a></li>
+                            <li><a href="./user/dashboard.html" class="nav-cta">Espace client</a></li>
                         </ul>
                     </div>
                     

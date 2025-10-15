@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./cssServices/parametre.css">
+    <title>Parametre-Services</title>
+</head>
+<body>
+    <div class="container"> 
+        <h1>Paramètres</h1>
+        
+        <div class="settings-section">
+            <h2>Gestion des Expéditeurs d'Email</h2>
+            <p>Ajoutez et gérez les comptes email que vous utiliserez pour envoyer des messages depuis la plateforme.</p>
+            
+            <div class="sender-list" id="sender-list">
+                <!-- La liste des expéditeurs sera chargée ici -->
+                <div class="skeleton-loader"></div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2>Ajouter un nouvel expéditeur</h2>
+            <form id="add-sender-form" data-provider="gmail">
+                <div class="form-group">
+                    <label for="provider_name">Nom d'affichage</label>
+                    <input type="text" id="provider_name" required placeholder="Ex: Mon Compte Pro">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="email_address">Adresse Email (Gmail)</label>
+                        <input type="email" id="email_address" required placeholder="votre.adresse@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtp_pass">Mot de passe d'application</label>
+                        <input type="password" id="smtp_pass" required placeholder="•••• •••• •••• ••••">
+                    </div>
+                </div>
+                <div class="info-box">
+                    <p>
+                        <strong>Important :</strong> Pour utiliser un compte Gmail, vous devez générer un <strong>mot de passe d'application</strong>. Votre mot de passe habituel ne fonctionnera pas.
+                    </p>
+                    <ol>
+                        <li>Activez la validation en deux étapes sur votre compte Google.</li>
+                        <li><a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer">Cliquez ici pour générer un mot de passe d'application.</a></li>
+                        <li>Sélectionnez "Messagerie" comme application et "Autre" comme appareil, puis copiez le mot de passe généré ici.</li>
+                    </ol>
+                </div>
+                <button type="submit">Ajouter l'expéditeur</button>
+            </form>
+        </div>
+    </div>
+    <script src="./jsServices/parametre.js"></script>
+</body>
+</html>

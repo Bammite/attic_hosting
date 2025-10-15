@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactions - Mail & SMS</title>
+    <link rel="stylesheet" href="cssMail/style.css">
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header class="header">
+        <a href="./repertoir.html" class="header-back">
+            <span>&#8592;</span>
+        </a>
+        
+        <!-- Sélecteur de compte -->
+        <div class="account-selector">
+            <div class="selected-account" id="account-selector-toggle">
+                <span id="selected-account-name">Tous les comptes</span>
+                <span class="arrow-down">&#9662;</span>
+            </div>
+            <div class="account-dropdown" id="account-dropdown">
+                <a href="#" class="account-option" data-account="tous">Tous les comptes</a>
+                <a href="#" class="account-option" data-account="pro">contact@mon-entreprise.com</a>
+                <a href="#" class="account-option" data-account="google">mon.nom@gmail.com</a>
+                <hr>
+                <a href="#" class="add-account-link">+ Ajouter un compte</a>
+            </div>
+        </div>
+
+        <div class="header-options">
+            <span id="options-toggle" class="options-toggle-icon">&#8942;</span>
+            <div id="options-menu" class="options-menu">
+                <a href="#">Selectionner</a>
+                <a href="#">Alerte</a>
+                <a href="#">Paramètres</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="container interactions-page">
+        <!-- Barre d'outils -->
+        <div class="interactions-toolbar">
+            <div class="search-container">
+                <input type="search" placeholder="Rechercher dans les interactions...">
+            </div>
+            <button class="btn-filter" id="open-filter-modal">
+                <span class="filter-icon">&#9776;</span>
+                <span class="desktop-only">Filtrer</span>
+            </button>
+        </div>
+
+        <!-- Liste des interactions -->
+        <section class="interactions-list">
+            <!-- Interaction Email Reçu -->
+            <div class="interaction-item received">
+                <div class="interaction-icon email-icon">&#9993;</div>
+                <div class="interaction-details">
+                    <div class="interaction-header">
+                        <span class="contact-name">Cabinet Ahmed BA</span>
+                        <span class="interaction-date">15 Juil. 2024</span>
+                    </div>
+                    <div class="interaction-subject">Re: Demande de devis</div>
+                    <p class="interaction-snippet">Bonjour, merci pour votre retour rapide. Pouvons-nous planifier un appel pour en discuter ?</p>
+                </div>
+            </div>
+
+            <!-- Interaction SMS Envoyé -->
+            <div class="interaction-item sent">
+                <div class="interaction-icon sms-icon">&#128172;</div>
+                <div class="interaction-details">
+                    <div class="interaction-header">
+                        <span class="contact-name">Yoro Fall</span>
+                        <span class="interaction-date">14 Juil. 2024</span>
+                    </div>
+                    <div class="interaction-subject">Rappel de RDV</div>
+                    <p class="interaction-snippet">Bonjour Yoro, juste un petit rappel pour notre rendez-vous de demain à 10h. À bientôt !</p>
+                </div>
+            </div>
+
+            <!-- Interaction Email Envoyé -->
+            <div class="interaction-item sent">
+                <div class="interaction-icon email-icon">&#9993;</div>
+                <div class="interaction-details">
+                    <div class="interaction-header">
+                        <span class="contact-name">Mohamed Cheikh</span>
+                        <span class="interaction-date">12 Juil. 2024</span>
+                    </div>
+                    <div class="interaction-subject">Votre facture #FACT-0123</div>
+                    <p class="interaction-snippet">Bonjour, veuillez trouver ci-joint votre facture pour le mois de Juillet. Cordialement.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modale de Filtre -->
+    <div class="modal-overlay" id="filter-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Filtrer les interactions</h2>
+                <span class="close-button" id="close-filter-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="filter-form">
+                    <div class="form-group">
+                        <label>Type de message</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="type" value="all" checked> Tous</label>
+                            <label><input type="radio" name="type" value="email"> Email</label>
+                            <label><input type="radio" name="type" value="sms"> SMS</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-start">Date de début</label>
+                        <input type="date" id="date-start" name="date-start">
+                    </div>
+                    <div class="form-group">
+                        <label for="date-end">Date de fin</label>
+                        <input type="date" id="date-end" name="date-end">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="reset-filters">Réinitialiser</button>
+                <button class="btn-primary" id="apply-filters">Appliquer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./jsMail/modal.js"></script>
+
+    <script src="./jsMail/interaction.js"></script>
+
+</body>
+</html>

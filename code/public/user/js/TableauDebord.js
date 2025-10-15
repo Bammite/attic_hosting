@@ -1,5 +1,5 @@
 // Fonction pour créer ou mettre à jour un cookie
-function setCookie(name, value, days) {
+function setCookie(name, value, days = 7) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
@@ -18,49 +18,104 @@ function getCookie(name) {
 }
 
 // Fonction pour mettre à jour le cookie avec la dernière section et option
-function updateLastSectionCookie(index) {
-    setCookie('lastSection', index, 7); // Cookie valable 7 jours
+function updateLastSectionCookie(sectionId) {
+    setCookie('lastSectionId', sectionId, 7); // Cookie valable 7 jours
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    // --- Logique pour la modale de gestion des services ---
+    const manageBtn = document.getElementById('manage-services-btn');
+    const servicesModal = document.getElementById('services-management-modal');
+    const closeServicesModal = document.getElementById('close-services-modal');
+    const saveServicesConfigBtn = document.getElementById('save-services-config');
+
+    if (manageBtn && servicesModal && closeServicesModal && saveServicesConfigBtn) {
+        manageBtn.addEventListener('click', () => {
+            servicesModal.style.display = 'block';
+        });
+
+        closeServicesModal.addEventListener('click', () => {
+            servicesModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == servicesModal) {
+                servicesModal.style.display = 'none';
+            }
+        });
+
+        saveServicesConfigBtn.addEventListener('click', () => {
+            const checklist = document.getElementById('services-checklist');
+            const visibleServices = [];
+            checklist.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                visibleServices.push(checkbox.dataset.serviceLabel);
+            });
+            localStorage.setItem('visibleServices', JSON.stringify(visibleServices));
+            alert('Configuration enregistrée. La page va se recharger.');
+            window.location.reload();
+        });
+    }
+
     const sections = document.querySelectorAll('.section');
-    const options = document.querySelectorAll('.tableauDeBord__content .opt');
+    // On sélectionne toutes les options cliquables qui ont un data-target
+    const options = document.querySelectorAll('.tableauDeBord__content .opt[data-target]');
     const tableauDeBord = document.getElementById("tableauDeBord");
 
+    // Fonction pour afficher une section par son ID
+    function showSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        const targetOption = document.querySelector(`.opt[data-target="${sectionId}"]`);
 
-
-    // Vérifier si un cookie existe pour la dernière section
-    const lastSectionIndex = getCookie('lastSection');
-    if (lastSectionIndex !== null && sections[lastSectionIndex] && options[lastSectionIndex]) {
-        // Charger la dernière section et option depuis le cookie
-        sections.forEach(section => section.classList.remove('active'));
-        options.forEach(option => option.classList.add('opt--noir'));
-        sections[lastSectionIndex].classList.add('active');
-        options[lastSectionIndex].classList.remove('opt--noir');
-    } else {
-        // Afficher la première section par défaut
-        if (sections.length > 0) {
-            sections[0].classList.add('active');
-            options[0].classList.remove('opt--noir');
+        if (targetSection && targetOption) {
+            sections.forEach(section => section.classList.remove('active'));
+            options.forEach(option => option.classList.add('opt--noir'));
+            
+            targetSection.classList.add('active');
+            targetOption.classList.remove('opt--noir');
+            updateLastSectionCookie(sectionId);
         }
     }
 
+    // Vérifier si un cookie existe pour la dernière section
+    const lastSectionId = getCookie('lastSectionId');
+    if (lastSectionId) {
+        showSection(lastSectionId);
+    } else {
+        // Afficher la première section par défaut si aucun cookie n'est trouvé
+        showSection('accueil'); // 'accueil' est l'ID de la première section
+    }
+
     // Ajouter un événement pour chaque option
-    options.forEach((option, index) => {
+    options.forEach(option => {
         option.addEventListener('click', () => {
-            sections.forEach(section => section.classList.remove('active'));
-            options.forEach(option => option.classList.add('opt--noir'));
-            sections[index].classList.add('active');
-            options[index].classList.remove('opt--noir');
-
-            // Mettre à jour le cookie avec la nouvelle section
-            updateLastSectionCookie(index);
-
+            const sectionId = option.dataset.target;
+            showSection(sectionId);
             // Fermer le menu après avoir sélectionné une option
             tableauDeBord.classList.remove("tableauDeBord--visible");
         });
     });
+
+    // --- Logique pour la recherche dans les services auxiliaires ---
+    const searchInput = document.getElementById('aux-service-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const serviceCards = document.querySelectorAll('.aux-service-card');
+
+            serviceCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
 });
 
 document.addEventListener("DOMContentLoaded", () => {

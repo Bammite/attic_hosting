@@ -1,0 +1,243 @@
+/* Variables et styles de base */
+:root {
+    --primary-color: #007bff;
+    --background-color: #f4f7fa;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --text-light: #666;
+    --border-color: #e0e0e0;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inria Sans', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.form-builder-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.fb-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.fb-header-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.fb-header-title h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.back-link {
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+.fb-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Boutons */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: #e9ecef;
+    color: var(--text-color);
+}
+
+/* Barre d'outils et recherche */
+.fb-toolbar {
+    margin-bottom: 20px;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+#form-search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    font-family: 'Inria Sans', sans-serif;
+}
+
+
+/* Liste des formulaires */
+.form-list-header, .form-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+}
+
+.form-list-header {
+    color: var(--text-light);
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.form-item {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+}
+
+.form-item:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.form-title {
+    font-weight: bold;
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-badge.open {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+
+.status-badge.closed {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Menus contextuels */
+.header-menu-container, .item-menu-container {
+    position: relative;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 8px 0;
+    z-index: 10;
+    min-width: 200px;
+}
+
+.menu-options.active {
+    display: block;
+}
+
+.menu-options a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.menu-options a:hover {
+    background-color: #f8f9fa;
+}
+
+.menu-options .separator {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 8px 0;
+}
+
+.danger-text {
+    color: var(--danger-color) !important;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .fb-header {
+        flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+    }
+
+    .fb-header-actions {
+        /* Le conteneur des actions prend toute la largeur et vient après la barre de recherche */
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .fb-toolbar {
+        order: 2; /* La barre de recherche vient avant les actions */
+    }
+
+    /* Le bouton de création prend toute la largeur */
+    #create-new-form-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+}

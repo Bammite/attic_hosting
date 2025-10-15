@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Formulaires - bammite</title>
+    <link rel="stylesheet" href="css/form-builder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js" defer></script>
+</head>
+<body>
+
+    <div class="form-builder-container">
+        <header class="fb-header">
+            <div class="fb-header-title">
+                <a href="../../user/dashboard.html" class="back-link" title="Retour au tableau de bord">
+                    <iconify-icon icon="mdi:arrow-left"></iconify-icon>
+                </a>
+                <h1>Mes Formulaires</h1>
+            </div>
+            <div class="fb-header-actions">
+                <button class="btn-primary" id="create-new-form-btn">
+                    <iconify-icon icon="mdi:plus"></iconify-icon>
+                    Créer un formulaire
+                </button>
+                <div class="header-menu-container">
+                    <button class="icon-btn" id="header-menu-btn" title="Plus d'options">
+                        <iconify-icon icon="mdi:dots-vertical"></iconify-icon>
+                    </button>
+                    <div class="menu-options" id="header-menu-options">
+                        <a href="#">Sélectionner</a>
+                        <a href="reponseFormulaire.html">Consulter les réponses</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="fb-main">
+            <div class="fb-toolbar">
+                <div class="search-wrapper">
+                    <input type="search" id="form-search-input" placeholder="Rechercher un formulaire...">
+                </div>
+            </div>
+            <div class="form-list-header">
+                <span>Titre</span>
+                <span class="text-center">Réponses</span>
+                <span class="text-center">Statut</span>
+                <span class="text-right">Actions</span>
+            </div>
+            <div class="form-list" id="form-list-container">
+                <!-- Les formulaires seront injectés ici par JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Template pour un élément de la liste de formulaires -->
+    <template id="form-item-template">
+        <div class="form-item">
+            <span class="form-title"></span>
+            <span class="form-responses text-center"></span>
+            <div class="form-status text-center">
+                <span class="status-badge"></span>
+            </div>
+            <div class="form-actions text-right">
+                <button class="icon-btn copy-link-btn" title="Copier le lien de partage">
+                    <iconify-icon icon="mdi:link-variant"></iconify-icon>
+                </button>
+                <div class="item-menu-container">
+                    <button class="icon-btn item-menu-btn" title="Options">
+                        <iconify-icon icon="mdi:dots-vertical"></iconify-icon>
+                    </button>
+                    <div class="menu-options item-menu-options">
+                        <a href="#" class="action-modify">Modifier</a>
+                        <a href="#" class="action-view-responses">Consulter les réponses</a>
+                        <a href="#" class="action-toggle-status">Fermer les soumissions</a>
+                        <a href="#" class="action-limit-responses">Limiter les réponses</a>
+                        <div class="separator"></div>
+                        <a href="#" class="action-delete danger-text">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

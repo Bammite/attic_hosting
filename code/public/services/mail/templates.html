@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Templates</title>
+    <link rel="stylesheet" href="cssMail/style.css">
+    <link rel="stylesheet" href="cssMail/template.css">
+    <link rel="stylesheet" href="cssMail/composer.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="./repertoir.html" class="header-back">
+            <span>&#8592;</span> <span class="desktop-only" style="font-size: 1.2rem; vertical-align: middle; margin-left: 0.5rem;">Retour</span>
+        </a>
+        <div class="header-options">
+            <span id="options-toggle" class="options-toggle-icon">&#8942;</span>
+            <div id="options-menu" class="options-menu">
+                <a href="#">Gérer les comptes</a>
+                <a href="#">Paramètres</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-title-header">
+            <h1>Mes Templates</h1>
+            <button class="btn-add-contact" id="add-template-btn">+ Nouveau Template</button>
+        </div>
+
+        <!-- Navigation des sections -->
+        <nav class="template-nav">
+            <a href="?template_type=T_mail" id="nav-mail" class="active">Templates Mail</a>
+            <a href="?template_type=T_sms" id="nav-sms">Templates SMS</a>
+        </nav>
+
+        <!-- Section des templates Mail -->
+        <section id="email-templates" class="templates-section">
+            <div class="templates-grid">
+                <!-- Template Mail 1 -->
+                <div class="template-card">
+                    <h3 class="template-title">Relance Facture Impayée</h3>
+                    <div class="template-preview email-preview">
+                        <div class="email-header">
+                            <strong>Objet:</strong> Rappel amical - Facture #1234
+                        </div>
+                        <div class="email-body">
+                            Bonjour [Nom du client],<br><br>
+                            Sauf erreur de notre part, il semble que la facture #1234 datée du [Date] n'a pas encore été réglée...
+                        </div>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn-secondary btn-edit-template">Modifier</button>
+                        <button class="btn-primary btn-use-template">Utiliser</button>
+                    </div>
+                </div>
+
+                <!-- Template Mail 2 -->
+                <div class="template-card">
+                    <h3 class="template-title">Offre de Bienvenue</h3>
+                    <div class="template-preview email-preview">
+                        <div class="email-header">
+                            <strong>Objet:</strong> Bienvenue ! Voici votre cadeau
+                        </div>
+                        <div class="email-body">
+                            Bonjour et bienvenue !<br><br>
+                            Pour vous remercier de votre inscription, nous sommes heureux de vous offrir une réduction de 15% sur votre prochaine commande...
+                        </div>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn-secondary btn-edit-template">Modifier</button>
+                        <button class="btn-primary btn-use-template">Utiliser</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section des templates SMS -->
+        <section id="sms-templates" class="templates-section hidden">
+            <div class="templates-grid">
+                <!-- Template SMS 1 -->
+                <div class="template-card">
+                    <h3 class="template-title">Confirmation de RDV</h3>
+                    <div class="template-preview sms-preview">
+                        <p>Bonjour [Nom], votre RDV avec [Nom du pro] est confirmé pour le [Date] à [Heure]. En cas d'empêchement, merci de nous prévenir. L'équipe [Nom entreprise].</p>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn-secondary btn-edit-template">Modifier</button>
+                        <button class="btn-primary btn-use-template">Utiliser</button>
+                    </div>
+                </div>
+
+                <!-- Template SMS 2 -->
+                <div class="template-card">
+                    <h3 class="template-title">Alerte Promo Flash</h3>
+                    <div class="template-preview sms-preview">
+                        <p>PROMO FLASH ! -25% sur tout le site avec le code FLASH25 jusqu'à ce soir minuit. Ne ratez pas cette occasion ! [Lien]</p>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn-secondary btn-edit-template">Modifier</button>
+                        <button class="btn-primary btn-use-template">Utiliser</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="jsMail/composer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailSection = document.getElementById('email-templates');
+            const smsSection = document.getElementById('sms-templates');
+            const navMail = document.getElementById('nav-mail');
+            const navSms = document.getElementById('nav-sms');
+            let activeType = 'email';
+
+            // Fonction pour afficher la bonne section
+            const showSection = (sectionToShow) => {
+                if (sectionToShow === 'sms') {
+                    emailSection.classList.add('hidden');
+                    smsSection.classList.remove('hidden');
+                    navMail.classList.remove('active');
+                    navSms.classList.add('active');
+                    activeType = 'sms';
+                } else { // Par défaut, on affiche les emails
+                    smsSection.classList.add('hidden');
+                    emailSection.classList.remove('hidden');
+                    navSms.classList.remove('active');
+                    navMail.classList.add('active');
+                    activeType = 'email';
+                }
+            };
+
+            // Lire le paramètre de l'URL au chargement
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateType = urlParams.get('template_type');
+
+            if (templateType === 'T_sms') {
+                showSection('sms');
+            } else {
+                showSection('mail'); // 'T_mail' ou absence de paramètre
+            }
+
+            // Gérer le clic sur les onglets (sans recharger la page)
+            navMail.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection('mail');
+                history.pushState(null, '', '?template_type=T_mail');
+            });
+
+            navSms.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection('sms');
+                history.pushState(null, '', '?template_type=T_sms');
+            });
+
+            // --- Gestion des actions sur les templates ---
+
+            // Bouton "+ Nouveau Template"
+            document.getElementById('add-template-btn').addEventListener('click', () => {
+                openComposer({ type: activeType, mode: 'create-template' });
+            });
+
+            // Boutons "Modifier" (délégation d'événements)
+            document.body.addEventListener('click', (e) => {
+                if (e.target.classList.contains('btn-edit-template')) {
+                    // Simuler la récupération des données du template
+                    const templateData = {
+                        name: 'Relance Facture Impayée',
+                        subject: 'Rappel amical - Facture #1234',
+                        body: "Bonjour [Nom du client],<br><br>Sauf erreur de notre part, il semble que la facture #1234 datée du [Date] n'a pas encore été réglée..."
+                    };
+                    openComposer({ type: activeType, mode: 'edit-template', template: templateData });
+                }
+            });
+
+            // Boutons "Utiliser" (délégation d'événements)
+            document.body.addEventListener('click', (e) => {
+                if (e.target.classList.contains('btn-use-template')) {
+                    // Simuler la récupération des données du template
+                    const templateData = {
+                        subject: 'Rappel amical - Facture #1234',
+                        body: "Bonjour [Nom du client],<br><br>Sauf erreur de notre part, il semble que la facture #1234 datée du [Date] n'a pas encore été réglée..."
+                    };
+                    openComposer({ type: activeType, mode: 'use-template', template: templateData });
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>

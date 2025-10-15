@@ -102,32 +102,30 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(serviceBlock);
     });
 
-    // Gestion des menus contextuels (3 points)
-    // Utilise la délégation d'événements pour la performance
-    container.addEventListener('click', (e) => {
-        const menuBtn = e.target.closest('.menu-toggle-btn');
-        if (!menuBtn) return;
-
-        const currentMenuOptions = menuBtn.nextElementSibling;
-
-        // Fermer tous les autres menus ouverts
-        document.querySelectorAll('.menu-options.active').forEach(menu => {
-            if (menu !== currentMenuOptions) {
-                menu.classList.remove('active');
-            }
-        });
-
-        // Basculer l'état du menu cliqué
-        currentMenuOptions.classList.toggle('active');
-    });
-
-    // Fermer les menus si on clique n'importe où ailleurs sur la page
+    /**
+     * Amélioration de la gestion des événements de clic pour les menus contextuels.
+     * On utilise un seul écouteur sur `document` (délégation d'événements)
+     * pour gérer à la fois l'ouverture et la fermeture des menus.
+     * C'est plus performant que d'avoir plusieurs écouteurs.
+     */
     document.addEventListener('click', (e) => {
-        // Si le clic n'est pas à l'intérieur d'un menu ou sur son bouton
-        if (!e.target.closest('.service-block-menu')) {
-            document.querySelectorAll('.menu-options.active').forEach(menu => {
-                menu.classList.remove('active');
+        const menuBtn = e.target.closest('.menu-toggle-btn');
+        const activeMenus = document.querySelectorAll('.menu-options.active');
+
+        // Si on a cliqué sur un bouton de menu
+        if (menuBtn) {
+            const currentMenu = menuBtn.nextElementSibling;
+            
+            // Ferme tous les autres menus
+            activeMenus.forEach(menu => {
+                if (menu !== currentMenu) {
+                    menu.classList.remove('active');
+                }
             });
+            // Ouvre ou ferme le menu actuel
+            currentMenu.classList.toggle('active');
+        } else if (!e.target.closest('.menu-options')) { // Si on a cliqué en dehors de tout menu ouvert
+            activeMenus.forEach(menu => menu.classList.remove('active'));
         }
     });
 });

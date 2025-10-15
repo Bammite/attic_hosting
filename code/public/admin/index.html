@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Utilisateurs</title>
+    <link rel="stylesheet" href="../services/mail/cssMail/style.css">
+    <style>
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            padding: 2rem;
+        }
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        h1, h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .user-table th, .user-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .user-table th {
+            background-color: var(--primary-bg);
+        }
+        .btn-danger {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .form-group-checkbox {
+            flex-direction: row;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h1>Gestion des Utilisateurs</h1>
+
+        <div class="card">
+            <h2>Ajouter un nouvel utilisateur</h2>
+            <form id="add-user-form" class="form-grid">
+                <div class="form-group"><label for="username">Nom d'utilisateur</label><input type="text" id="username" required></div>
+                <div class="form-group"><label for="email">Email</label><input type="email" id="email" required></div>
+                <div class="form-group"><label for="password">Mot de passe</label><input type="password" id="password" required></div>
+                <div class="form-group"><label for="role">Rôle</label><select id="role" required><option value="user">Utilisateur</option><option value="admin">Administrateur</option></select></div>
+                <div class="form-group form-group-checkbox"><input type="checkbox" id="developpeur" style="width: auto; margin-right: 10px;"><label for="developpeur">Développeur</label></div>
+                <div class="form-group form-group-checkbox"><input type="checkbox" id="etudiant" style="width: auto; margin-right: 10px;"><label for="etudiant">Étudiant</label></div>
+                <button type="submit" class="btn-primary">Ajouter l'utilisateur</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Liste des utilisateurs</h2>
+            <table class="user-table">
+                <thead><tr><th>Nom d'utilisateur</th><th>Email</th><th>Rôle</th><th>Développeur</th><th>Étudiant</th><th>Créé le</th><th>Actions</th></tr></thead>
+                <tbody id="user-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

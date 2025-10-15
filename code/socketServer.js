@@ -1,9 +1,10 @@
 const { Server } = require("socket.io");
 
-let io;
-
 function initializeSocket(server) {
-    io = new Server(server);
+    const io = new Server(server, {
+        // Options de configuration si nécessaire, par exemple pour CORS
+        // cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] }
+    });
 
     io.on('connection', (socket) => {
         console.log('🔌 Un utilisateur est connecté:', socket.id);
@@ -13,7 +14,7 @@ function initializeSocket(server) {
         });
     });
 
-    return io;
+    return io; 
 }
 
 module.exports = { initializeSocket };

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur Avancé</title>
+    <link rel="stylesheet" href="cssMail/style.css">
+
+    <script src="https://cdn.tiny.cloud/1/pwiz21xaiqpbei23afux7qd2mja6jxrs1p5kec4y55ci2t8y/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+        body {
+            background-color: var(--primary-bg);
+        }
+        .editor-container {
+            padding: 2rem;
+            max-width: 2100px;
+            margin: 2rem auto;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .editor-header h1 {
+            margin: 0;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Style pour les pilules de variables dans l'éditeur */
+        .variable-pill {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="editor-container">
+        <div class="editor-header">
+            <h1>Éditeur Avancé</h1>
+            <button class="btn-primary" id="save-and-close-btn">Sauvegarder et Fermer</button>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="email-subject">Objet</label>
+                <input type="text" id="email-subject" name="email-subject" placeholder="Sujet de votre message">
+            </div>
+            <textarea id="advanced-editor"></textarea>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const saveBtn = document.getElementById('save-and-close-btn');
+
+            saveBtn.addEventListener('click', () => {
+                const subject = document.getElementById('email-subject').value;
+                const body = tinymce.get('advanced-editor').getContent();
+
+                const dataToReturn = {
+                    subject: subject,
+                    body: body,
+                    // Ajout d'un timestamp pour garantir que l'événement est unique
+                    timestamp: Date.now() 
+                };
+
+                // Sauvegarder les données dans localStorage pour que l'onglet parent les récupère
+                localStorage.setItem('advancedEditorUpdate', JSON.stringify(dataToReturn));
+
+                // Tenter de fermer l'onglet.
+                // window.opener est une référence à la fenêtre qui a ouvert celle-ci.
+                // Si window.opener existe, cela signifie que la fenêtre a été ouverte par un script.
+                if (window.opener) {
+                    window.close();
+                } else {
+                    // Si la page a été rechargée, window.opener sera null.
+                    // On informe l'utilisateur qu'il doit fermer l'onglet manuellement.
+                    alert("Données sauvegardées ! Vous pouvez maintenant fermer cet onglet.");
+                }
+            });
+
+        });
+
+        tinymce.init({
+            selector: 'textarea#advanced-editor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount code',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table insertvariable | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat code',
+            height: 600,
+            menubar: false,
+            content_style: `
+                .variable-pill {
+                    background-color: #e0e7ff;
+                    color: #4338ca;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-size: 0.9em;
+                    font-family: monospace;
+                }
+            `,
+            setup: function (editor) {
+                // Ajout du bouton de variables personnalisé
+                editor.ui.registry.addMenuButton('insertvariable', {
+                    text: '{...}',
+                    tooltip: 'Insérer une variable',
+                    fetch: function (callback) {
+                        const items = [
+                            { type: 'menuitem', text: 'Nom du contact', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{nom}}</span>&nbsp;') },
+                            { type: 'menuitem', text: 'Email du contact', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{email}}</span>&nbsp;') },
+                            { type: 'menuitem', text: 'Téléphone', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{telephone}}</span>&nbsp;') },
+                            { type: 'menuitem', text: 'Nom de l\'entreprise', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{entreprise}}</span>&nbsp;') },
+                            { type: 'menuitem', text: 'Catégorie', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{categorie}}</span>&nbsp;') },
+                            { type: 'menuitem', text: 'Date du jour', onAction: () => editor.execCommand('mceInsertContent', false, '<span class="variable-pill" contenteditable="false">{{date_jour}}</span>&nbsp;') }
+                        ];
+                        callback(items);
+                    }
+                });
+
+                // Cette fonction est appelée avant que l'éditeur ne soit rendu.
+                editor.on('init', function () {
+                    // L'événement 'init' est déclenché lorsque l'éditeur est entièrement initialisé.
+                    const dataString = sessionStorage.getItem('advancedEditorData');
+                    if (dataString) {
+                        const data = JSON.parse(dataString);
+
+                        // Pré-remplir le champ "Objet"
+                        document.getElementById('email-subject').value = data.subject || '';
+
+                        // Pré-remplir le contenu de l'éditeur
+                        editor.setContent(data.body || '');
+
+                        // Nettoyer sessionStorage pour que les données ne soient pas réutilisées
+                        sessionStorage.removeItem('advancedEditorData');
+                    }
+                });
+            },
+            
+            /* Activer l'upload d'images par glisser-déposer ou copier-coller */
+            automatic_uploads: true,
+            
+            /* Spécifier le type d'images que vous acceptez */
+            images_file_types: 'jpeg,jpg,jpe,jfi,jif,jfif,png,gif,bmp,webp',
+
+            /**
+             * Callback pour le sélecteur de fichiers.
+             * C'est cette fonction qui est appelée quand on clique sur l'icône "parcourir"
+             * dans la boîte de dialogue d'image ou de média.
+             */
+            file_picker_callback: (cb, value, meta) => {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*'); // Accepter seulement les images
+
+                input.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+
+                    const reader = new FileReader();
+                    reader.addEventListener('load', () => {
+                        /*
+                          NOTE: Pour une solution de production, vous devriez uploader le fichier
+                          sur votre serveur ici, et utiliser l'URL retournée par le serveur.
+                          Pour cet exemple, nous utilisons une image encodée en base64.
+                          Ceci peut rendre vos emails très lourds.
+                        */
+                        const id = 'blobid' + (new Date()).getTime();
+                        const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                        const base64 = reader.result.split(',')[1];
+                        const blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        /* Appeler le callback pour insérer l'image dans l'éditeur */
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    });
+                    reader.readAsDataURL(file);
+                });
+
+                input.click();
+            },
+        });
+    </script>
+
+</body>
+</html>
