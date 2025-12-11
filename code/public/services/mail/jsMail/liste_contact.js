@@ -1,115 +1,183 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('userToken');
+    const loader = document.getElementById('loader-container');
+    const container = document.querySelector('.container');
+    const mobileList = document.getElementById('contact-list-mobile');
+    const desktopTbody = document.getElementById('contact-list-desktop');
 
-    // --- Collection de contacts (données de test) ---
-    let contactsData = [
-        { id: 'd3hi9s', name: 'Cabinet Ahmed BA', email: 'ahmed@gamil.co', phone: '784371193', description: 'Client provenant de...', date: '31/08/26', interactions: 5, category: 'entreprise', companyName: 'Cabinet Ahmed BA' },
-        { id: 'a6fe5d', name: 'Yoro Fall', email: 'yoro@fall.co', phone: '771234567', description: 'Partenaire commercial', date: '15/07/26', interactions: 12, category: 'particulier', companyName: null },
-        { id: 'b8gh2k', name: 'Mohamed Cheikh', email: 'mohamed@cheikh.com', phone: '765432100', description: 'Prospect qualifié', date: '10/06/26', interactions: 2, category: 'particulier', companyName: null },
-        { id: 'c1ij4m', name: 'Awa Gueye', email: 'awa@gueye.sn', phone: '701122334', description: 'Contact interne', date: '01/05/26', interactions: 25, category: 'entreprise', companyName: 'Solutions Pro' }
-    ];
+    // 1. Vérifier si l'utilisateur est connecté
 
-    // --- Génération dynamique de la liste des contacts ---
-    const mobileListContainer = document.getElementById('contact-list-mobile');
-    const desktopListContainer = document.getElementById('contact-list-desktop');
-    const loaderContainer = document.getElementById('loader-container');
+    if (!token) {
+        alert("Vous n'êtes pas connecté. Redirection vers la page de connexion.");
+        window.location.href = '/auth.html';
+        return;
+    }
 
-    function renderContacts(data) {
-        // Vide les conteneurs
-        mobileListContainer.innerHTML = '';
-        desktopListContainer.innerHTML = '';
+    let allContacts = []; // Stocker tous les contacts pour la modification et la suppression
 
-        data.forEach(contact => {
-            // Génère la vue mobile
-            const mobileItem = `
-                <li class="contact-list-item" data-id="${contact.id}" data-email="${contact.email}" data-phone="${contact.phone}">
-                    <div class="contact-info-mobile">
-                        <input type="checkbox" class="contact-checkbox">
-                        <span>${contact.name}</span>
-                    </div>
-                    <div class="contact-action-mobile">&#9654;</div>
-                </li>`;
-            mobileListContainer.innerHTML += mobileItem;
+    const showLoader = () => {
+        if (loader) loader.innerHTML = '<div class="loader"></div>';
+    };
 
-            // Génère la vue desktop
-            const desktopItem = `
-                <tr data-id="${contact.id}" data-email="${contact.email}" data-phone="${contact.phone}">
-                    <td><input type="checkbox" id="contact-checkbox-${contact.id}" name="contact-checkbox" value="${contact.id}" class="contact-checkbox-desktop"></td>
+    const hideLoader = () => {
+        if (loader) loader.innerHTML = '';
+    };
+
+    const renderContacts = (contacts) => {
+        mobileList.innerHTML = '';
+        desktopTbody.innerHTML = '';
+
+        if (contacts.length === 0) {
+            const emptyMessage = '<li>Aucun contact trouvé.</li>';
+            mobileList.innerHTML = emptyMessage;
+            desktopTbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Aucun contact trouvé.</td></tr>';
+            return;
+        }
+
+        contacts.forEach(contact => {
+            const formattedDate = new Date(contact.created_at).toLocaleDateString('fr-FR');
+            
+            // On prend le premier email ou le premier téléphone comme contact principal à afficher
+            const mainContactValue = (contact.emails && contact.emails.length > 0) 
+                ? contact.emails[0] 
+                : (contact.phones && contact.phones.length > 0 ? contact.phones[0] : 'N/A');
+
+               // --- NOUVELLE LOGIQUE D'AFFICHAGE DES CONTACTS ---
+            const generateContactDetailsHTML = (contact) => {
+                const emails = contact.emails || [];
+                const phones = contact.phones || [];
+                let html = '';
+
+                if (emails.length > 0) {
+                    html += `<div class="contact-detail-line">📧 ${emails[0]}`;
+                    if (emails.length > 1) {
+                        html += ` <span class="more-count" title="${emails.slice(1).join(', ')}">+${emails.length - 1}</span>`;
+                    }
+                    html += `</div>`;
+                }
+
+                if (phones.length > 0) {
+                    html += `<div class="contact-detail-line">📞 ${phones[0]}`;
+                    if (phones.length > 1) {
+                        html += ` <span class="more-count" title="${phones.slice(1).join(', ')}">+${phones.length - 1}</span>`;
+                    }
+                    html += `</div>`;
+                }
+
+                return html || 'N/A';
+            };
+
+
+            // Ligne pour la table desktop
+            const desktopRow = `
+                <tr>
+                    <td><input type="checkbox" class="contact-checkbox-desktop" data-id="${contact.id}"></td>
                     <td>${contact.id}</td>
                     <td>${contact.name}</td>
-                    <td class="contact-info-desktop">
-                        <span class="email">${contact.emails[0]? contact.emails[0] : ''}</span>
-                        <span class="phone">${contact.phones[0] ? contact.phones[0] : ''}</span>
+                    <td>${generateContactDetailsHTML(contact)}</td>
+                    <td>${contact.description || 'N/A'}</td>
+                    <td>${formattedDate}</td>
+                    <td><button class="btn-icon" title="Voir les interactions">✉️</button></td>
+                    <td>
+                        <button class="btn-icon btn-edit" data-id="${contact.id}" title="Modifier">✏️</button>
+                        <button class="btn-icon btn-delete" data-id="${contact.id}" title="Supprimer">🗑️</button>
                     </td>
-                    <td class="contact-info-desktop">${contact.description}</td>
-                    <td>${contact.created_at}</td>
-                    <td>${contact.interactions}</td>
-                    <td class="contact-actions-desktop">
-                        <span>&#9998;</span> <span>&#9993;</span> <span>&#128172;</span>
-                    </td>
-                </tr>`;
-            desktopListContainer.innerHTML += desktopItem;
+                </tr>
+            `;
+            desktopTbody.innerHTML += desktopRow;
+
+            // Élément pour la liste mobile
+            const mobileItem = `
+                <li class="contact-item">
+                    <div class="contact-info">
+                        <input type="checkbox" class="contact-checkbox" data-id="${contact.id}">
+                        <div>
+                            <span class="contact-name">${contact.name}</span>
+                            <span class="contact-value">${mainContactValue}</span>
+                        </div>
+                    </div>
+                    <div class="contact-actions">
+                        <button class="btn-icon btn-delete" data-id="${contact.id}" title="Supprimer">🗑️</button>
+                    </div>
+                </li>
+            `;
+            mobileList.innerHTML += mobileItem;
         });
-    }
+    };
 
-    // Charge les contacts depuis le serveur
-    async function loadContacts() {
-        showLoader(loaderContainer);
-        mobileListContainer.innerHTML = '';
-        desktopListContainer.innerHTML = '';
-
+    // On rend la fonction globale pour qu'elle soit accessible depuis la modale
+    window.fetchContacts = async () => {
+        showLoader();
         try {
-            const response = await fetch('/api/contacts');
+            // 2. Effectuer l'appel API en incluant le token
+            const response = await fetch('/api/contacts', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // C'est la ligne la plus importante !
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            // 3. Gérer les cas d'erreur (token expiré, etc.)
+            if (response.status === 401) {
+                localStorage.removeItem('userToken');
+                alert("Votre session a expiré. Veuillez vous reconnecter.");
+                window.location.href = '/auth.html';
+                return;
+            }
+
             if (!response.ok) {
-                throw new Error('Erreur lors de la récupération des contacts.');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erreur serveur.');
             }
-            contactsData = await response.json(); // Met à jour la variable globale
-            renderContacts(contactsData);
+
+            const contacts = await response.json();
+            allContacts = contacts; // On sauvegarde les données complètes
+            renderContacts(allContacts);
+
         } catch (error) {
-            console.error(error);
-            desktopListContainer.innerHTML = `<tr><td colspan="8" style="text-align: center; color: red; padding: 2rem;">${error.message}</td></tr>`;
+            console.error('Erreur lors de la récupération des contacts:', error);
+            mobileList.innerHTML = `<li>Erreur lors de la récupération des contacts.</li>`;
+            desktopTbody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Erreur lors de la récupération des contacts.</td></tr>`;
         } finally {
-            hideLoader(loaderContainer);
+            hideLoader();
         }
-    }    
-    
-    // Lancement du chargement au démarrage de la page
-    loadContacts();
+    };
 
+    // Lancer la récupération des contacts au chargement de la page
+    window.fetchContacts();
 
-    // --- Actions de groupe ---
+    // Utiliser la délégation d'événements pour les boutons d'action
+    container.addEventListener('click', (e) => {
+        const editButton = e.target.closest('.btn-edit');
+        const deleteButton = e.target.closest('.btn-delete');
 
-    // Fonction pour récupérer les données des contacts sélectionnés
-    function getSelectedContactsData() {
-        const selectedContactIds = new Set();
-        // Sélectionne toutes les cases cochées (mobile et desktop)
-        const checkedBoxes = document.querySelectorAll('.contact-checkbox:checked, .contact-checkbox-desktop:checked');
-        
-        checkedBoxes.forEach(checkbox => {
-            const contactRow = checkbox.closest('li, tr'); // Trouve le parent <li> ou <tr>
-            if (contactRow && contactRow.dataset.id) {
-                selectedContactIds.add(contactRow.dataset.id);
+        if (editButton) {
+            const contactId = parseInt(editButton.dataset.id, 10);
+            const contactToEdit = allContacts.find(c => c.id === contactId);
+            if (contactToEdit) {
+                openContactModal(contactToEdit);
             }
-        });
-        console.log('Contacts Data:', contactsData);
-        console.log('Selected Contact IDs:', selectedContactIds);
+        }
 
+        if (deleteButton) {
+            const contactId = deleteButton.dataset.id;
+            if (confirm("Voulez-vous vraiment supprimer ce contact ? Cette action est irréversible.")) {
+                handleDeleteContact(contactId);
+            }
+        }
+    });
 
-        // Retourne les objets contacts complets
-        return Array.from(selectedContactIds).map(id => contactsData.find(c => c.id == id)).filter(Boolean);
-    }
-
-    if (document.getElementById('bulk-action-send-mail')) {
-        document.getElementById('bulk-action-send-mail').addEventListener('click', () => {
-            const selectedContacts = getSelectedContactsData();
-            // On passe les objets contacts complets au compositeur
-            openComposer({ type: 'email', recipients: selectedContacts });
-        });
-    }
-    
-    if (document.getElementById('bulk-action-send-sms')) {
-        document.getElementById('bulk-action-send-sms').addEventListener('click', () => {
-            const { phones } = getSelectedContactsData();
-            openComposer({ type: 'sms', recipients: phones });
-        });
-    }
+    const handleDeleteContact = async (contactId) => {
+        try {
+            const response = await fetch(`/api/contacts/${contactId}`, { 
+                method: 'DELETE', 
+                headers: { 'Authorization': `Bearer ${token}` } 
+            });
+            if (!response.ok) throw new Error((await response.json()).message || 'Erreur de suppression');
+            alert('Contact supprimé avec succès.');
+            window.fetchContacts(); // Recharger la liste
+        } catch (error) { alert(`Erreur: ${error.message}`); }
+    };
 });

@@ -114,7 +114,7 @@ function openComposer(options = {}) {
                 ${templateNameField}
                 ${subjectField}
                 <div class="composer-editor-container">
-                    <div class="composer-toolbar">
+                    <div class="composer-toolbar"> 
                         <button data-command="bold"><b>B</b></button>
                         <button data-command="italic"><i>I</i></button>
                         <button data-command="underline"><u>U</u></button>
@@ -264,8 +264,17 @@ function openComposer(options = {}) {
     const loadSenders = async () => {
         if (!isEmail || !senderSelect) return;
 
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            console.error("Token non trouvé, impossible de charger les expéditeurs.");
+            senderSelect.innerHTML = `<option value="">Erreur: non connecté</option>`;
+            return;
+        }
+      
         try {
-            const response = await fetch('/api/settings/email-senders');
+            const response = await fetch('/api/settings/email-senders', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (!response.ok) throw new Error('Erreur au chargement des expéditeurs.');
             
             const senders = await response.json();
@@ -500,40 +509,67 @@ function openComposer(options = {}) {
                 console.error('Erreur:', error);
             });
         } else { // 'send' ou 'use-template'
-            // Logique pour envoyer un message
-            const senderId = isEmail ? senderSelect.value : null;
-            if (isEmail && !senderId) {
-                alert("Veuillez sélectionner un expéditeur ou en configurer un dans les paramètres.");
-                return;
-            }
-
-            const emailData = {
-                senderId: senderId,
-                recipients: getPills().map(pill => pill.dataset.value),
-                subject: isEmail ? composerOverlay.querySelector('#composer-subject').value : '',
-                body: finalBody,
-            };
-
             sendBtn.disabled = true;
             showNotification('sending', 'Envoi en cours...');
+            const token = localStorage.getItem('userToken'); // Correction : Utiliser localStorage
 
-            console.log("Tentative d'envoi des données suivantes :", emailData);
-            fetch('/api/mailer/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(emailData)
-            })
-            .then(async response => {
-                const result = await response.json();
-                if (!response.ok) throw result; // Lancer l'erreur pour la catcher
-                showNotification('success', "L'email a été envoyé avec succès !");
-                eraseCookie(DRAFT_COOKIE_NAME); // Effacer le brouillon uniquement en cas de succès
-            })
-            .catch(error => {
-                const errorMessage = error.message || "Les détails de l'erreur sont dans la console.";
-                showNotification('error', `L'envoi a échoué. ${errorMessage}`);
-                console.error("ERREUR : L'email n'a pas pu être envoyé.", error); // Garder le log pour le débogage
-            });
+            if (isEmail) {
+                // Logique pour envoyer un email
+                const senderId = senderSelect.value;
+                if (!senderId) {
+                    alert("Veuillez sélectionner un expéditeur ou en configurer un dans les paramètres.");
+                    sendBtn.disabled = false;
+                    notificationOverlay.style.display = 'none';
+                    return;
+                }
+
+                const emailData = {
+                    senderId: senderId,
+                    recipients: getPills().map(pill => pill.dataset.value),
+                    subject: composerOverlay.querySelector('#composer-subject').value,
+                    body: finalBody,
+                };
+
+                fetch('/api/mailer/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(emailData)
+                })
+                .then(async response => {
+                    const result = await response.json();
+                    if (!response.ok) throw result;
+                    showNotification('success', "L'email a été envoyé avec succès !");
+                    eraseCookie(DRAFT_COOKIE_NAME);
+                })
+                .catch(error => {
+                    const errorMessage = error.message || "Les détails de l'erreur sont dans la console.";
+                    showNotification('error', `L'envoi a échoué. ${errorMessage}`);
+                    console.error("ERREUR : L'email n'a pas pu être envoyé.", error);
+                });
+            } else {
+                // Logique pour envoyer un SMS
+                const recipients = getPills().map(pill => pill.dataset.value);
+                const message = editor.innerText; // Pour les SMS, on prend le texte brut
+
+                // On envoie un SMS à chaque destinataire
+                const sendPromises = recipients.map(recipient => {
+                    return fetch('/api/sms/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({ numDestinataire: recipient, message: message })
+                    }).then(res => res.ok ? Promise.resolve() : Promise.reject(new Error(`Échec pour ${recipient}`)));
+                });
+
+                Promise.all(sendPromises)
+                    .then(() => {
+                        showNotification('success', 'Tous les SMS ont été soumis à lenvoi !');
+                        eraseCookie(DRAFT_COOKIE_NAME);
+                    })
+                    .catch(error => {
+                        showNotification('error', "Au moins un envoi de SMS a échoué. Vérifiez la console.");
+                        console.error("Erreur lors de l'envoi des SMS:", error);
+                    });
+            }
         }
     });
 

@@ -22,31 +22,85 @@
         
         <div class="settings-section">
             <h2>Ajouter un nouvel expéditeur</h2>
-            <form id="add-sender-form" data-provider="gmail">
+
+            <div class="form-group">
+                <label for="provider-select">Choisissez un fournisseur</label>
+                <select id="provider-select">
+                    <option value="gmail">Gmail</option>
+                    <option value="yahoo">Yahoo Mail</option>
+                    <option value="other">Autre (Configuration manuelle)</option>
+                </select>
+            </div>
+
+            <!-- Formulaire pour Gmail -->
+            <form id="form-gmail" class="provider-form active">
                 <div class="form-group">
                     <label for="provider_name">Nom d'affichage</label>
-                    <input type="text" id="provider_name" required placeholder="Ex: Mon Compte Pro">
+                    <input type="text" class="provider_name" required placeholder="Ex: Mon Compte Pro">
                 </div>
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="email_address">Adresse Email (Gmail)</label>
-                        <input type="email" id="email_address" required placeholder="votre.adresse@gmail.com">
+                        <input type="email" class="email_address" required placeholder="votre.adresse@gmail.com">
                     </div>
                     <div class="form-group">
                         <label for="smtp_pass">Mot de passe d'application</label>
-                        <input type="password" id="smtp_pass" required placeholder="•••• •••• •••• ••••">
+                        <input type="password" class="smtp_pass" required placeholder="•••• •••• •••• ••••">
                     </div>
                 </div>
-                <div class="info-box">
+                <div class="info-box" id="info-gmail">
                     <p>
                         <strong>Important :</strong> Pour utiliser un compte Gmail, vous devez générer un <strong>mot de passe d'application</strong>. Votre mot de passe habituel ne fonctionnera pas.
                     </p>
                     <ol>
                         <li>Activez la validation en deux étapes sur votre compte Google.</li>
                         <li><a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer">Cliquez ici pour générer un mot de passe d'application.</a></li>
-                        <li>Sélectionnez "Messagerie" comme application et "Autre" comme appareil, puis copiez le mot de passe généré ici.</li>
+                        <li>Sélectionnez "Messagerie" comme application et "Ordinateur Windows" (ou autre) comme appareil, puis copiez le mot de passe généré.</li>
                     </ol>
                 </div>
+                <button type="submit">Ajouter l'expéditeur</button>
+            </form>
+
+            <!-- Formulaire pour Yahoo -->
+            <form id="form-yahoo" class="provider-form">
+                <div class="form-group">
+                    <label for="provider_name">Nom d'affichage</label>
+                    <input type="text" class="provider_name" required placeholder="Ex: Mon Compte Yahoo">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="email_address">Adresse Email (Yahoo)</label>
+                        <input type="email" class="email_address" required placeholder="votre.adresse@yahoo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtp_pass">Mot de passe d'application</label>
+                        <input type="password" class="smtp_pass" required placeholder="•••• •••• •••• ••••">
+                    </div>
+                </div>
+                <div class="info-box" id="info-yahoo">
+                    <p><strong>Important :</strong> Comme pour Gmail, vous devez utiliser un <strong>mot de passe d'application</strong> pour Yahoo.</p>
+                    <ol>
+                        <li>Connectez-vous à votre compte Yahoo et allez dans "Informations personnelles".</li>
+                        <li>Cliquez sur "Sécurité du compte" puis sur "Gérer les mots de passe d'application".</li>
+                        <li>Donnez un nom à votre application (ex: MonCRM) et cliquez sur "Générer". Copiez le mot de passe ici.</li>
+                    </ol>
+                </div>
+                <button type="submit">Ajouter l'expéditeur</button>
+            </form>
+
+            <!-- Formulaire pour "Autre" -->
+            <form id="form-other" class="provider-form">
+                <div class="form-group"><label>Nom d'affichage</label><input type="text" class="provider_name" required placeholder="Ex: Compte OVH"></div>
+                <div class="form-group"><label>Adresse Email</label><input type="email" class="email_address" required placeholder="contact@mondomaine.com"></div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Hôte SMTP</label><input type="text" class="smtp_host" required placeholder="smtp.mondomaine.com"></div>
+                    <div class="form-group"><label>Port SMTP</label><input type="number" class="smtp_port" required placeholder="465"></div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Utilisateur SMTP</label><input type="text" class="smtp_user" required placeholder="Souvent identique à l'email"></div>
+                    <div class="form-group"><label>Mot de passe SMTP</label><input type="password" class="smtp_pass" required placeholder="••••••••••••"></div>
+                </div>
+                <div class="form-group checkbox-group"><input type="checkbox" class="smtp_secure" checked><label>Utiliser une connexion sécurisée (SSL/TLS)</label></div>
                 <button type="submit">Ajouter l'expéditeur</button>
             </form>
         </div>

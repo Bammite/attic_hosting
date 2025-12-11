@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Sauvegarder le token et rediriger
             localStorage.setItem('userToken', data.token);
             alert('Connexion réussie !');
-            window.location.href = '/dashboard.html'; // Rediriger vers le tableau de bord
+            window.location.href = './user/dashboard.html'; // Rediriger vers le tableau de bord
 
         } catch (error) {
             alert(`Erreur de connexion: ${error.message}`);
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmPassword = document.getElementById('signup-confirm-password').value;
 
         if (password !== confirmPassword) {
-            alert('Les mots de passe не correspondent pas.');
+            alert('Les mots de passe ne correspondent pas.');
             return;
         }
 
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' }, 
                 body: JSON.stringify(formData),
             });
 
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Sauvegarder le token et rediriger
             localStorage.setItem('userToken', data.token);
             alert('Inscription réussie ! Vous êtes maintenant connecté.');
-            window.location.href = '/dashboard.html'; // Rediriger vers le tableau de bord
+            window.location.href = './user/dashboard.html'; // Rediriger vers le tableau de bord
 
         } catch (error) {
             alert(`Erreur d'inscription: ${error.message}`);

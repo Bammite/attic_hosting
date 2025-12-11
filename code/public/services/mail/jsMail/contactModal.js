@@ -78,10 +78,20 @@ function openContactModal(contact = null) {
     addDetailBtn.addEventListener('click', () => addDetailField());
     addDetailField(); // Ajouter un premier champ par défaut
 
+    // Si on est en mode édition, pré-remplir les champs
+    if (isEditing) {
+        detailsContainer.innerHTML = ''; // Vider le champ par défaut
+        contact.emails.forEach(email => addDetailField('email', email));
+        contact.phones.forEach(phone => addDetailField('phone', phone));
+        // Vous pouvez ajouter une logique similaire pour les customFields si nécessaire
+    }
+
     const customFieldsContainer = document.getElementById('custom-fields-container');
     const addCustomFieldBtn = document.getElementById('add-custom-field-btn');
 
     const addCustomField = (key = '', value = '') => {
+        // Ne pas ajouter de champ vide si la clé et la valeur sont vides
+        if (key === '' && value === '') return;
         const fieldId = `custom-${Date.now()}`;
         const customFieldHTML = `
             <div class="dynamic-field" id="${fieldId}">
@@ -117,6 +127,13 @@ function openContactModal(contact = null) {
             return;
         }
 
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            alert("Session expirée. Veuillez vous reconnecter.");
+            window.location.href = '/auth.html'; // Assurez-vous que ce chemin est correct
+            return;
+        }
+
         // Récupérer les détails de contact
         const details = Array.from(detailsContainer.querySelectorAll('.dynamic-field')).map(field => ({
             type: field.querySelector('.detail-type').value,
@@ -142,19 +159,29 @@ function openContactModal(contact = null) {
             customFields
         };
 
+        const contactId = contact ? contact.id : null;
+        const apiURL = isEditing ? `/api/contacts/${contactId}` : '/api/contacts';
+        const apiMethod = isEditing ? 'PUT' : 'POST';
+
         try {
-            const response = await fetch('/api/contacts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+            const response = await fetch(apiURL, {
+                method: apiMethod,
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(contactData)
             });
             const result = await response.json();
-            if (!response.ok) throw new Error(result.message);
+            if (!response.ok) throw new Error(result.message || 'Une erreur est survenue.');
 
-            alert('Contact ajouté avec succès !');
+            alert(`Contact ${isEditing ? 'mis à jour' : 'ajouté'} avec succès !`);
             closeModal();
             // Ici, il faudrait appeler une fonction pour rafraîchir la liste des contacts
-            if (typeof renderContacts === 'function') {
+            // La fonction fetchContacts est définie dans liste_contact.js, on peut l'appeler si elle est globale
+            if (typeof fetchContacts === 'function') {
+                fetchContacts();
+            } else {
                 // Simule un rechargement pour l'instant
                 location.reload();
             }

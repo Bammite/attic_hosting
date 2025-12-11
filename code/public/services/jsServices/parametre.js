@@ -1,14 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     const senderListContainer = document.getElementById('sender-list');
-    const addSenderForm = document.getElementById('add-sender-form');
+    const token = localStorage.getItem('userToken');
+    const providerSelect = document.getElementById('provider-select');
+    const providerForms = document.querySelectorAll('.provider-form');
+
+    // Configuration des fournisseurs
+    const providersConfig = {
+        gmail: { host: 'smtp.gmail.com', port: 465, secure: true },
+        yahoo: { host: 'smtp.mail.yahoo.com', port: 465, secure: true }
+    };
     const API_URL = '/api/settings/email-senders';
+
+    // Vérifier si l'utilisateur est connecté
+    if (!token) {
+        alert("Session expirée ou non connecté. Redirection vers la page de connexion.");
+        window.location.href = '../../auth.html'; // Ajustez ce chemin si nécessaire
+        return;
+    }
 
     /**
      * Affiche une notification simple.
-     */
+     */ 
     const notify = (message, isError = false) => {
         alert(message);
         if (isError) console.error(message);
+    };
+
+    /**
+     * Wrapper pour fetch qui ajoute le token d'authentification.
+     */
+    const apiFetch = async (url, options = {}) => {
+        const defaultOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        const mergedOptions = { ...defaultOptions, ...options, headers: {...defaultOptions.headers, ...options.headers} };
+
+        const response = await fetch(url, mergedOptions);
+
+        if (response.status === 401) {
+            localStorage.removeItem('userToken');
+            notify("Votre session a expiré. Veuillez vous reconnecter.", true);
+            window.location.href = '../../auth.html';
+            throw new Error("Unauthorized");
+        }
+        return response;
     };
 
     /**
@@ -16,11 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const fetchSenders = async () => {
         try {
-            const response = await fetch(API_URL);
-            if (!response.ok) {
-                const err = await response.json();
-                throw new Error(err.message || 'Impossible de charger les expéditeurs.');
-            }
+            const response = await apiFetch(API_URL);
+            if (!response.ok) throw new Error((await response.json()).message || 'Impossible de charger les expéditeurs.');
             const senders = await response.json();
             renderSenders(senders);
         } catch (error) {
@@ -59,40 +94,58 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Gère la soumission du formulaire d'ajout.
      */
-    addSenderForm.addEventListener('submit', async (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const email = document.getElementById('email_address').value;
+        const form = e.target;
+        const provider = form.id.replace('form-', '');
+        
+        let formData = {};
+        const email = form.querySelector('.email_address').value;
 
-        // Pré-remplir les données pour Gmail
-        const gmailData = {
-            smtp_host: 'smtp.gmail.com',
-            smtp_port: 465,
-            smtp_secure: true,
-            smtp_user: email, // Pour Gmail, l'utilisateur SMTP est l'adresse email complète
-        };
-
-        const formData = {
-            ...gmailData,
-            provider_name: document.getElementById('provider_name').value,
-            email_address: email,
-            smtp_pass: document.getElementById('smtp_pass').value,
-        };
+        if (provider === 'gmail' || provider === 'yahoo') {
+            const config = providersConfig[provider];
+            formData = {
+                provider_name: form.querySelector('.provider_name').value,
+                email_address: email,
+                smtp_pass: form.querySelector('.smtp_pass').value,
+                smtp_host: config.host,
+                smtp_port: config.port,
+                smtp_secure: config.secure,
+                smtp_user: email, // Pour Gmail et Yahoo, l'utilisateur est l'email
+            };
+        } else { // "other"
+            formData = {
+                provider_name: form.querySelector('.provider_name').value,
+                email_address: email,
+                smtp_host: form.querySelector('.smtp_host').value,
+                smtp_port: form.querySelector('.smtp_port').value,
+                smtp_user: form.querySelector('.smtp_user').value,
+                smtp_pass: form.querySelector('.smtp_pass').value,
+                smtp_secure: form.querySelector('.smtp_secure').checked,
+            };
+        }
 
         try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+            const response = await apiFetch(API_URL, { method: 'POST', body: JSON.stringify(formData) });
             const result = await response.json();
             if (!response.ok) throw new Error(result.message);
 
             notify('Expéditeur ajouté avec succès !');
-            addSenderForm.reset();
+            form.reset();
             fetchSenders(); // Rafraîchir la liste
         } catch (error) {
             notify(error.message, true);
         }
+    };
+
+    providerForms.forEach(form => form.addEventListener('submit', handleFormSubmit));
+
+    // Gère le changement de fournisseur
+    providerSelect.addEventListener('change', () => {
+        const selectedProvider = providerSelect.value;
+        providerForms.forEach(form => {
+            form.classList.toggle('active', form.id === `form-${selectedProvider}`);
+        });
     });
 
     /**
@@ -103,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const senderId = e.target.closest('.btn-delete').dataset.id;
             if (confirm(`Voulez-vous vraiment supprimer cet expéditeur ?`)) {
                 try {
-                    const response = await fetch(`${API_URL}/${senderId}`, { method: 'DELETE' });
+                    const response = await apiFetch(`${API_URL}/${senderId}`, { method: 'DELETE' });
                     const result = await response.json();
                     if (!response.ok) throw new Error(result.message);
 

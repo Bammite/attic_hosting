@@ -448,6 +448,23 @@ a {
     gap: 1rem;
 }
 
+.contact-detail-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    white-space: nowrap;
+}
+
+.more-count {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    cursor: help;
+}
+
 .contact-action-mobile {
     font-size: 1.5rem;
     cursor: pointer;

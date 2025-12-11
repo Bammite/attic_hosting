@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .profile-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-header h1 {
+            margin: 0;
+        }
+        .profile-details .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-details .detail-item:last-child {
+            border-bottom: none;
+        }
+        .detail-item .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .detail-item .value {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Mon Profil</h1>
+        </div>
+        <div id="loader-container" class="loader-container" style="min-height: 150px;"></div>
+        <div class="profile-details" id="profile-details-content" style="display: none;">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+    </div>
+
+    <script src="./js/profile.js"></script>
+</body>
+</html>
